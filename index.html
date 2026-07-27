@@ -291,6 +291,30 @@
   </div>
 </dialog>
 
+<dialog id="profile-modal">
+  <div class="modal-head">
+    <span class="modal-badge" id="profile-modal-badge">🧑</span>
+    <div>
+      <h4>Tùy chỉnh hồ sơ</h4>
+      <span>Cập nhật thông tin hiển thị của bạn</span>
+    </div>
+    <button type="button" class="modal-close" id="profile-modal-close" aria-label="Đóng">✕</button>
+  </div>
+  <div class="modal-body">
+    <form id="profile-form" class="auth-form">
+      <label>Họ và tên
+        <input type="text" name="name" required placeholder="Nguyễn Văn A" />
+      </label>
+      <label>Email
+        <input type="email" name="email" disabled />
+      </label>
+      <p class="auth-error" id="profile-error"></p>
+      <p class="auth-success" id="profile-success"></p>
+      <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    </form>
+  </div>
+</dialog>
+
 <footer>
   <div class="wrap">
     <p>© 2026 Gia Sư Online.</p>

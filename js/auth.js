@@ -114,18 +114,116 @@ registerForm.addEventListener("submit", function (e) {
     });
 });
 
+// ---- Profile modal ----
+const profileModal = document.getElementById("profile-modal");
+const profileModalClose = document.getElementById("profile-modal-close");
+const profileForm = document.getElementById("profile-form");
+const profileError = document.getElementById("profile-error");
+const profileSuccess = document.getElementById("profile-success");
+
+profileModalClose.addEventListener("click", function () { profileModal.close(); });
+profileModal.addEventListener("click", function (e) {
+  var box = profileModal.getBoundingClientRect();
+  var inside = e.clientX >= box.left && e.clientX <= box.right && e.clientY >= box.top && e.clientY <= box.bottom;
+  if (!inside) profileModal.close();
+});
+
+function openProfileModal() {
+  var user = auth.currentUser;
+  if (!user) return;
+  profileError.textContent = "";
+  profileSuccess.textContent = "";
+  profileForm.name.value = user.displayName || "";
+  profileForm.email.value = user.email || "";
+  profileModal.showModal();
+}
+
+profileForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  profileError.textContent = "";
+  profileSuccess.textContent = "";
+  var name = profileForm.name.value.trim();
+  updateProfile(auth.currentUser, { displayName: name })
+    .then(function () {
+      profileSuccess.textContent = "Đã lưu thay đổi.";
+      renderAuthArea(auth.currentUser);
+    })
+    .catch(function (err) {
+      profileError.textContent = friendlyError(err);
+    });
+});
+
+// ---- Nav auth area: guest buttons vs. logged-in chip with dropdown ----
+function closeAllMenus() {
+  document.querySelectorAll(".user-menu.open").forEach(function (m) { m.classList.remove("open"); });
+}
+document.addEventListener("click", closeAllMenus);
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") closeAllMenus();
+});
+
 function renderAuthArea(user) {
   authArea.innerHTML = "";
   if (user) {
-    var chip = document.createElement("div");
-    chip.className = "user-chip";
+    var wrap = document.createElement("div");
+    wrap.className = "user-chip-wrap";
+
+    var trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "user-chip";
+    trigger.setAttribute("aria-haspopup", "true");
+    trigger.setAttribute("aria-expanded", "false");
+
     var initial = (user.displayName || user.email || "?").trim().charAt(0).toUpperCase();
-    chip.innerHTML =
-      '<span class="user-avatar">' + initial + "</span>" +
-      '<span class="user-name">' + (user.displayName || user.email) + "</span>" +
-      '<button type="button" class="user-logout" id="logout-btn">Đăng xuất</button>';
-    authArea.appendChild(chip);
-    document.getElementById("logout-btn").addEventListener("click", function () {
+    var avatar = document.createElement("span");
+    avatar.className = "user-avatar";
+    avatar.textContent = initial;
+    var statusDot = document.createElement("span");
+    statusDot.className = "user-status-dot";
+    statusDot.title = "Đang đăng nhập";
+    avatar.appendChild(statusDot);
+
+    var nameEl = document.createElement("span");
+    nameEl.className = "user-name";
+    nameEl.textContent = user.displayName || user.email;
+
+    var caret = document.createElement("span");
+    caret.className = "user-caret";
+    caret.textContent = "▾";
+
+    trigger.appendChild(avatar);
+    trigger.appendChild(nameEl);
+    trigger.appendChild(caret);
+
+    var menu = document.createElement("div");
+    menu.className = "user-menu";
+    menu.innerHTML =
+      '<button type="button" class="user-menu-item" id="menu-profile">🧑 Tùy chỉnh hồ sơ</button>' +
+      '<a class="user-menu-item" href="#tien-do" id="menu-progress">📊 Theo dõi tiến độ học tập</a>' +
+      '<button type="button" class="user-menu-item danger" id="menu-logout">🚪 Đăng xuất</button>';
+
+    trigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = menu.classList.contains("open");
+      closeAllMenus();
+      menu.classList.toggle("open", !isOpen);
+      trigger.setAttribute("aria-expanded", String(!isOpen));
+    });
+    menu.addEventListener("click", function (e) { e.stopPropagation(); });
+
+    wrap.appendChild(trigger);
+    wrap.appendChild(menu);
+    authArea.appendChild(wrap);
+
+    menu.querySelector("#menu-profile").addEventListener("click", function () {
+      closeAllMenus();
+      openProfileModal();
+    });
+    menu.querySelector("#menu-progress").addEventListener("click", function () {
+      closeAllMenus();
+    });
+    menu.querySelector("#menu-logout").addEventListener("click", function () {
+      closeAllMenus();
       signOut(auth);
     });
   } else {

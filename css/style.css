@@ -183,6 +183,43 @@ header.nav{
 }
 .auth-text-link:hover{color:var(--accent-strong);}
 .auth-text-link:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+
+.user-chip-wrap{position:relative;}
+.user-chip{
+  display:flex;align-items:center;gap:8px;font:inherit;font-size:13.5px;font-weight:600;
+  background:var(--bg-panel);border:1px solid var(--line);border-radius:999px;
+  padding:5px 12px 5px 5px;cursor:pointer;color:var(--ink);
+}
+.user-chip:hover{background:var(--surface);}
+.user-chip:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+.user-avatar{
+  position:relative;width:28px;height:28px;border-radius:50%;flex:none;
+  background:linear-gradient(140deg,var(--accent),var(--accent-strong));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;
+}
+.user-status-dot{
+  position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;border-radius:50%;
+  background:var(--sage);border:2px solid var(--bg-panel);
+}
+.user-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-soft);}
+.user-caret{font-size:10px;color:var(--ink-faint);}
+@media (max-width:640px){ .user-name{display:none;} }
+
+.user-menu{
+  display:none;position:absolute;top:calc(100% + 8px);right:0;min-width:220px;z-index:60;
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);
+  padding:6px;flex-direction:column;gap:2px;
+}
+.user-menu.open{display:flex;}
+.user-menu-item{
+  display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none;
+  padding:10px 12px;border-radius:10px;
+}
+.user-menu-item:hover{background:var(--bg-panel);}
+.user-menu-item:focus-visible{outline:3px solid var(--accent);outline-offset:-2px;}
+.user-menu-item.danger{color:var(--coral);}
+.user-menu-item.danger:hover{background:var(--coral-tint);}
 .user-chip{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;}
 .user-avatar{
   width:28px;height:28px;border-radius:50%;flex:none;
@@ -215,6 +252,7 @@ header.nav{
 .auth-form input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;}
 .auth-form .btn-primary{margin-top:4px;}
 .auth-error{color:var(--coral);font-size:13px;font-weight:600;min-height:1px;}
+.auth-success{color:var(--sage);font-size:13px;font-weight:600;min-height:1px;}
 @media(prefers-reduced-motion:reduce){ .btn-primary{transition:none;} .btn-primary:hover{transform:none;} .btn-primary::after{display:none;} }
 @media (max-width:1060px){ .nav-links{display:none;} }
 
