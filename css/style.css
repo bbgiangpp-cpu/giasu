@@ -338,6 +338,15 @@ dialog#subject-modal::backdrop{background:rgba(40,26,60,.45);backdrop-filter:blu
 }
 .exam-format-label{display:block;font-size:12px;font-weight:800;letter-spacing:.03em;color:var(--modal-accent, var(--accent-strong));margin-bottom:6px;}
 .exam-format p{font-size:13.5px;color:var(--ink);line-height:1.55;}
+.exam-detail{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);}
+.exam-detail p{font-size:13px;margin-bottom:6px;}
+.exam-detail ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;}
+.exam-detail li{font-size:13px;color:var(--ink-soft);}
+.exam-disclaimer{
+  margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+  font-size:11.5px;line-height:1.5;color:var(--coral);
+}
+.exam-disclaimer b{color:var(--coral);}
 .modal-body p.modal-note{color:var(--ink-soft);font-size:13.5px;margin-bottom:16px;}
 .chapter-list{display:flex;flex-direction:column;gap:22px;}
 .grade-group{display:flex;flex-direction:column;gap:10px;}
