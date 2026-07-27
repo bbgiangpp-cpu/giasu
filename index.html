@@ -23,6 +23,9 @@
       <a href="#danh-gia">Đánh giá HSA / TSA</a>
       <a href="#tien-do">Theo dõi tiến độ</a>
     </nav>
+    <div class="auth-area" id="auth-area">
+      <button type="button" class="btn btn-ghost btn-sm" id="open-login">Đăng nhập</button>
+    </div>
     <a class="btn btn-primary btn-sm" href="#tien-do">Theo dõi tiến độ →</a>
   </div>
 </header>
@@ -242,6 +245,51 @@
   </div>
 </dialog>
 
+<dialog id="auth-modal">
+  <div class="modal-head">
+    <span class="modal-badge" id="auth-modal-badge">🔐</span>
+    <div>
+      <h4>Tài khoản của bạn</h4>
+      <span>Đồng bộ tiến độ học tập trên mọi thiết bị</span>
+    </div>
+    <button type="button" class="modal-close" id="auth-modal-close" aria-label="Đóng">✕</button>
+  </div>
+  <div class="modal-body">
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login">Đăng nhập</button>
+      <button type="button" class="auth-tab" data-tab="register">Đăng ký</button>
+    </div>
+
+    <form id="login-form" class="auth-form">
+      <label>Email
+        <input type="email" name="email" required placeholder="ban@email.com" />
+      </label>
+      <label>Mật khẩu
+        <input type="password" name="password" required minlength="6" placeholder="Tối thiểu 6 ký tự" />
+      </label>
+      <p class="auth-error" id="login-error"></p>
+      <button type="submit" class="btn btn-primary">Đăng nhập →</button>
+    </form>
+
+    <form id="register-form" class="auth-form" hidden>
+      <label>Họ và tên
+        <input type="text" name="name" required placeholder="Nguyễn Văn A" />
+      </label>
+      <label>Email
+        <input type="email" name="email" required placeholder="ban@email.com" />
+      </label>
+      <label>Mật khẩu
+        <input type="password" name="password" required minlength="6" placeholder="Tối thiểu 6 ký tự" />
+      </label>
+      <label>Nhập lại mật khẩu
+        <input type="password" name="confirm" required minlength="6" placeholder="Nhập lại mật khẩu" />
+      </label>
+      <p class="auth-error" id="register-error"></p>
+      <button type="submit" class="btn btn-primary">Tạo tài khoản →</button>
+    </form>
+  </div>
+</dialog>
+
 <footer>
   <div class="wrap">
     <p>© 2026 Gia Sư Online.</p>
@@ -249,5 +297,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script type="module" src="js/auth.js"></script>
 </body>
 </html>
