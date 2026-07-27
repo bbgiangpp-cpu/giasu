@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gia Sư Online — Ôn thi theo đúng cấu trúc THPT 2025</title>
   <meta name="description" content="Nền tảng gia sư online 1-kèm-1: chọn môn bắt buộc và tự chọn theo đúng cấu trúc kỳ thi THPT 2025, theo dõi tiến độ học tập theo từng môn." />
-  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/style.css?v=14" />
 </head>
 <body>
 
@@ -237,8 +237,37 @@
       <div class="exam-detail" id="exam-detail"></div>
       <div class="exam-disclaimer">⚠️ Số liệu minh họa do trang tự soạn để tham khảo — <b>không phải</b> số liệu chính thức từ Bộ GD&amp;ĐT. Vui lòng đối chiếu đề thi minh họa chính thức trước khi sử dụng để ôn tập.</div>
     </div>
-    <p class="modal-note">Khung chương tham khảo theo Chương trình GDPT 2018 (lớp 10–11–12). Tên chương có thể lệch nhẹ tùy bộ SGK (Kết nối tri thức / Chân trời sáng tạo / Cánh diều) — gia sư sẽ đối chiếu đúng sách bạn đang học và điều chỉnh tốc độ sau buổi kiểm tra đầu vào.</p>
+    <p class="modal-note" id="modal-note">Khung chương tham khảo theo Chương trình GDPT 2018 (lớp 10–11–12). Tên chương có thể lệch nhẹ tùy bộ SGK (Kết nối tri thức / Chân trời sáng tạo / Cánh diều) — gia sư sẽ đối chiếu đúng sách bạn đang học và điều chỉnh tốc độ sau buổi kiểm tra đầu vào. Bấm vào một chương để xem tóm tắt bài giảng.</p>
     <div class="chapter-list" id="chapter-list"></div>
+
+    <div class="lesson-view" id="lesson-view" hidden>
+      <button type="button" class="lesson-back" id="lesson-back">← Quay lại danh sách chương</button>
+      <h5 class="lesson-title" id="lesson-title"></h5>
+
+      <div class="lesson-block">
+        <span class="lesson-label">🎯 Mục tiêu bài học</span>
+        <p id="lesson-objectives"></p>
+      </div>
+
+      <div class="lesson-block" id="lesson-theory-block">
+        <span class="lesson-label">📖 Lý thuyết trọng tâm</span>
+        <ul id="lesson-theory"></ul>
+      </div>
+
+      <div class="lesson-block" id="lesson-example-block">
+        <span class="lesson-label">✏️ Ví dụ minh họa</span>
+        <p id="lesson-example"></p>
+      </div>
+
+      <div class="lesson-block" id="lesson-practice-block">
+        <span class="lesson-label">📝 Tự luyện</span>
+        <ul id="lesson-practice"></ul>
+      </div>
+
+      <div class="lesson-soon" id="lesson-soon" hidden>
+        <p>📚 Bài giảng chi tiết cho chương này đang được gia sư biên soạn — sẽ sớm cập nhật. Bạn có thể đăng ký học để được giảng trực tiếp ngay bây giờ.</p>
+      </div>
+    </div>
   </div>
   <div class="modal-foot">
     <span>Chưa bắt đầu học chương nào</span>
@@ -409,9 +438,9 @@
   </div>
 </div>
 
-<script src="js/main.js?v=13"></script>
-<script type="module" src="js/auth.js?v=13"></script>
-<script type="module" src="js/chat.js?v=13"></script>
-<script type="module" src="js/ai-assistant.js?v=13"></script>
+<script src="js/main.js?v=14"></script>
+<script type="module" src="js/auth.js?v=14"></script>
+<script type="module" src="js/chat.js?v=14"></script>
+<script type="module" src="js/ai-assistant.js?v=14"></script>
 </body>
 </html>
