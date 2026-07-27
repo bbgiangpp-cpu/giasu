@@ -1,4 +1,16 @@
 (function(){
+  // ---- Progress tracking (localStorage; scoped per logged-in user if auth.js has set one) ----
+  function progressKey(subject, chapterName){
+    var uid = window.__currentUid || "guest";
+    return "progress_" + uid + "_" + subject + "::" + chapterName;
+  }
+  function isChapterDone(subject, chapterName){
+    try { return localStorage.getItem(progressKey(subject, chapterName)) === "1"; } catch(e){ return false; }
+  }
+  function markChapterDone(subject, chapterName){
+    try { localStorage.setItem(progressKey(subject, chapterName), "1"); } catch(e){}
+  }
+
   var COLOR_TOKENS = {
     gold:   {accent:"var(--gold)",   tint:"var(--gold-tint)"},
     rose:   {accent:"var(--rose)",   tint:"var(--rose-tint)"},
@@ -233,6 +245,35 @@
   var lessonPracticeBlock = document.getElementById("lesson-practice-block");
   var lessonPractice = document.getElementById("lesson-practice");
   var lessonSoon = document.getElementById("lesson-soon");
+  var lessonCompleteRow = document.getElementById("lesson-complete-row");
+  var lessonCompleteBtn = document.getElementById("lesson-complete-btn");
+  var completeToast = document.getElementById("complete-toast");
+  var modalProgress = document.getElementById("modal-progress");
+
+  var currentSubject = null;
+  var currentSubjectData = null;
+  var currentChapter = null;
+  var currentChapterRow = null;
+  var toastTimer = null;
+
+  function chapterMetaLabel(subject, chapterName, hasLesson){
+    if (isChapterDone(subject, chapterName)) return "✓ Hoàn thành";
+    return hasLesson ? "Xem bài giảng →" : "Chưa học";
+  }
+
+  function updateModalProgress(){
+    if (!currentSubjectData) return;
+    var total = 0, done = 0;
+    Object.keys(currentSubjectData.grades).forEach(function(grade){
+      currentSubjectData.grades[grade].forEach(function(ch){
+        total++;
+        if (isChapterDone(currentSubject, ch)) done++;
+      });
+    });
+    modalProgress.textContent = done > 0
+      ? "Đã hoàn thành " + done + "/" + total + " chương"
+      : "Chưa bắt đầu học chương nào";
+  }
 
   function showChapterListView(){
     lessonView.hidden = true;
@@ -241,8 +282,11 @@
     modalNote.hidden = false;
   }
 
-  function openLesson(subject, chapterName){
+  function openLesson(subject, chapterName, row){
     var lesson = LESSON_CONTENT[subject + "::" + chapterName];
+    currentSubject = subject;
+    currentChapter = chapterName;
+    currentChapterRow = row || null;
     lessonTitle.textContent = chapterName;
     chapterList.hidden = true;
     examFormatBox.hidden = true;
@@ -251,6 +295,7 @@
 
     if (lesson) {
       lessonSoon.hidden = true;
+      lessonCompleteRow.hidden = false;
       lessonObjectives.textContent = lesson.objectives;
       lessonTheoryBlock.hidden = false;
       lessonTheory.innerHTML = "";
@@ -268,19 +313,45 @@
         li.textContent = item;
         lessonPractice.appendChild(li);
       });
+      var done = isChapterDone(subject, chapterName);
+      lessonCompleteBtn.disabled = done;
+      lessonCompleteBtn.textContent = done ? "✓ Đã hoàn thành" : "✓ Đánh dấu đã hoàn thành";
     } else {
       lessonObjectives.textContent = "";
       lessonTheoryBlock.hidden = true;
       lessonExampleBlock.hidden = true;
       lessonPracticeBlock.hidden = true;
+      lessonCompleteRow.hidden = true;
       lessonSoon.hidden = false;
     }
   }
 
   lessonBack.addEventListener("click", showChapterListView);
 
+  lessonCompleteBtn.addEventListener("click", function(){
+    if (!currentSubject || !currentChapter) return;
+    markChapterDone(currentSubject, currentChapter);
+    lessonCompleteBtn.disabled = true;
+    lessonCompleteBtn.textContent = "✓ Đã hoàn thành";
+    if (currentChapterRow) {
+      var meta = currentChapterRow.querySelector(".chapter-meta");
+      if (meta) { meta.textContent = "✓ Hoàn thành"; meta.classList.add("done"); }
+    }
+    updateModalProgress();
+
+    completeToast.hidden = false;
+    completeToast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      completeToast.classList.remove("show");
+      setTimeout(function(){ completeToast.hidden = true; }, 250);
+    }, 1800);
+  });
+
   function openSubjectModal(subject, tagLabel, color){
     var data = SUBJECT_CONTENT[subject] || {short:subject.slice(0,2), grades:{"12":["Nội dung đang được cập nhật"]}};
+    currentSubject = subject;
+    currentSubjectData = data;
     var gradeKeys = Object.keys(data.grades).sort();
     var totalChapters = gradeKeys.reduce(function(sum, g){ return sum + data.grades[g].length; }, 0);
 
@@ -322,15 +393,18 @@
         row.type = "button";
         row.className = "chapter-item";
         var hasLesson = !!LESSON_CONTENT[subject + "::" + ch];
+        var metaLabel = chapterMetaLabel(subject, ch, hasLesson);
         row.innerHTML =
           '<span class="chapter-num">' + String(i + 1).padStart(2, "0") + '</span>' +
           '<span class="chapter-name">' + ch + '</span>' +
-          '<span class="chapter-meta">' + (hasLesson ? "Xem bài giảng →" : "Chưa học") + '</span>';
-        row.addEventListener("click", function(){ openLesson(subject, ch); });
+          '<span class="chapter-meta' + (metaLabel === "✓ Hoàn thành" ? " done" : "") + '">' + metaLabel + '</span>';
+        row.addEventListener("click", function(){ openLesson(subject, ch, row); });
         group.appendChild(row);
       });
       chapterList.appendChild(group);
     });
+
+    updateModalProgress();
 
     modalCta.onclick = function(){
       alert("Đã ghi nhận nhu cầu học " + subject + " (" + tagLabel + "). Đội ngũ sẽ liên hệ để xếp lịch học thử miễn phí.");
@@ -346,8 +420,10 @@
     if (!inside) modal.close();
   });
 
-  Array.prototype.forEach.call(document.querySelectorAll(".subj-card[data-subject]"), function(card){
-    card.addEventListener("click", function(){
+  Array.prototype.forEach.call(document.querySelectorAll(".subj-register-btn"), function(btn){
+    btn.addEventListener("click", function(){
+      var card = btn.closest(".subj-card[data-subject]");
+      if (!card) return;
       var subject = card.getAttribute("data-subject");
       var tag = card.getAttribute("data-tag") === "required" ? "Môn bắt buộc" : "Môn tự chọn";
       var color = COLOR_TOKENS[card.getAttribute("data-color")];

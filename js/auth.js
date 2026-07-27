@@ -308,6 +308,7 @@ document.addEventListener("keydown", function (e) {
 });
 
 function renderAuthArea(user) {
+  window.__currentUid = user ? user.uid : null;
   authArea.innerHTML = "";
   if (user) {
     var wrap = document.createElement("div");
