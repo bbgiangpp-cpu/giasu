@@ -5,6 +5,7 @@ export const firebaseConfig = {
   authDomain: "giasuonline-acc86.firebaseapp.com",
   projectId: "giasuonline-acc86",
   storageBucket: "giasuonline-acc86.firebasestorage.app",
+  databaseURL: "https://giasuonline-acc86-default-rtdb.asia-southeast1.firebasedatabase.app",
   messagingSenderId: "224223707909",
   appId: "1:224223707909:web:e59a3bb4cf5d44b690ad6c",
   measurementId: "G-QPPBQ17NF0"

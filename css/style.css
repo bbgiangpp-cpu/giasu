@@ -459,3 +459,77 @@ dialog#subject-modal::backdrop{background:rgba(40,26,60,.45);backdrop-filter:blu
   padding:18px 26px;border-top:1px solid var(--line);
 }
 .modal-foot span{font-size:12.5px;color:var(--ink-faint);}
+
+/* ---------- Chat widget ---------- */
+.chat-widget{position:fixed;right:20px;bottom:20px;z-index:80;}
+.chat-toggle{
+  position:relative;width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(140deg,var(--accent),var(--accent-strong));color:#fff;
+  font-size:24px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;
+  transition:transform .15s;
+}
+.chat-toggle:hover{transform:translateY(-2px) scale(1.04);}
+.chat-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+@media(prefers-reduced-motion:reduce){.chat-toggle{transition:none;} .chat-toggle:hover{transform:none;}}
+.chat-badge{
+  position:absolute;top:-2px;right:-2px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;
+  background:var(--sage);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--bg);
+}
+
+.chat-panel{
+  display:none;position:absolute;right:0;bottom:calc(100% + 14px);width:min(340px, calc(100vw - 40px));
+  height:min(480px, calc(100vh - 140px));background:var(--surface);border:1px solid var(--line);
+  border-radius:22px;box-shadow:var(--shadow);overflow:hidden;flex-direction:column;
+}
+.chat-panel.open{display:flex;}
+.chat-panel-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:16px 18px;border-bottom:1px solid var(--line);background:var(--accent-tint);flex:none;
+}
+.chat-panel-head h4{font-size:15px;margin-bottom:2px;}
+.chat-panel-head span{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:5px;}
+
+.chat-online-list{
+  list-style:none;margin:0;padding:10px 14px;display:flex;gap:8px;overflow-x:auto;flex:none;
+  border-bottom:1px solid var(--line);
+}
+.chat-online-item{
+  display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px;font-weight:600;
+  background:var(--bg-panel);border-radius:999px;padding:5px 10px;flex:none;
+}
+.chat-online-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);flex:none;display:inline-block;}
+.chat-online-empty{font-size:12px;color:var(--ink-faint);}
+
+.chat-messages{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.chat-empty{font-size:13px;color:var(--ink-faint);text-align:center;margin-top:20px;}
+.chat-msg{
+  max-width:82%;background:var(--bg-panel);border-radius:14px 14px 14px 4px;padding:8px 12px;align-self:flex-start;
+}
+.chat-msg.mine{
+  align-self:flex-end;background:var(--accent-tint);border-radius:14px 14px 4px 14px;
+}
+.chat-msg-name{display:block;font-size:11px;font-weight:800;color:var(--accent-strong);margin-bottom:2px;}
+.chat-msg-text{font-size:13.5px;color:var(--ink);white-space:pre-wrap;word-break:break-word;}
+.chat-msg-time{display:block;font-size:10px;color:var(--ink-faint);margin-top:3px;text-align:right;}
+
+.chat-guest-notice{padding:16px;text-align:center;border-top:1px solid var(--line);flex:none;}
+.chat-guest-notice p{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}
+
+.chat-form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);flex:none;}
+.chat-form input{
+  flex:1;min-width:0;font:inherit;font-size:13.5px;padding:10px 14px;border-radius:999px;
+  border:1px solid var(--line);background:var(--bg-panel);color:var(--ink);
+}
+.chat-form input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;}
+.chat-send{
+  width:38px;height:38px;border-radius:50%;border:none;flex:none;cursor:pointer;
+  background:linear-gradient(140deg,var(--accent),var(--accent-strong));color:#fff;font-size:14px;
+}
+.chat-send:hover{filter:brightness(1.05);}
+.chat-send:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+
+@media (max-width:480px){
+  .chat-widget{right:12px;bottom:12px;}
+  .chat-panel{right:-6px;}
+}

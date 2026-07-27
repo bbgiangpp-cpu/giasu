@@ -1,4 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,10 +6,13 @@ import {
   onAuthStateChanged,
   updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { firebaseConfig } from "./firebase-config.js";
+import { app } from "./firebase-app.js";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
+
+// Functions other modules (e.g. chat.js) need to run before the user's
+// session actually goes away — e.g. removing their "online" presence marker.
+window.__beforeLogout = window.__beforeLogout || [];
 
 // ---- Avatar stored locally in this browser (no backend storage set up yet) ----
 // Keyed by uid so it doesn't leak between accounts sharing a device.
@@ -112,7 +114,7 @@ closeOnBackdrop(registerModal);
 document.getElementById("login-modal-close").addEventListener("click", function () { loginModal.close(); });
 document.getElementById("register-modal-close").addEventListener("click", function () { registerModal.close(); });
 
-function openLogin() {
+export function openLogin() {
   registerModal.close();
   loginError.textContent = "";
   loginCaptcha.reset();
@@ -375,7 +377,9 @@ function renderAuthArea(user) {
     });
     menu.querySelector("#menu-logout").addEventListener("click", function () {
       closeAllMenus();
-      signOut(auth);
+      Promise.all(window.__beforeLogout.map(function (fn) {
+        try { return fn(); } catch (e) { return null; }
+      })).finally(function () { signOut(auth); });
     });
   } else {
     authArea.innerHTML =

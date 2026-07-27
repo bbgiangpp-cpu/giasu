@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gia Sư Online — Ôn thi theo đúng cấu trúc THPT 2025</title>
   <meta name="description" content="Nền tảng gia sư online 1-kèm-1: chọn môn bắt buộc và tự chọn theo đúng cấu trúc kỳ thi THPT 2025, theo dõi tiến độ học tập theo từng môn." />
-  <link rel="stylesheet" href="css/style.css?v=7" />
+  <link rel="stylesheet" href="css/style.css?v=8" />
 </head>
 <body>
 
@@ -355,7 +355,39 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=7"></script>
-<script type="module" src="js/auth.js?v=7"></script>
+<div class="chat-widget">
+  <button type="button" class="chat-toggle" id="chat-toggle" aria-expanded="false" aria-label="Mở khung chat">
+    💬
+    <span class="chat-badge" id="chat-badge" hidden>0</span>
+  </button>
+
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-panel-head">
+      <div>
+        <h4>💬 Chat cộng đồng</h4>
+        <span><span class="chat-online-dot"></span> <span id="chat-online-count">0</span> đang online</span>
+      </div>
+      <button type="button" class="modal-close" id="chat-close" aria-label="Đóng chat">✕</button>
+    </div>
+
+    <ul class="chat-online-list" id="chat-online-list"></ul>
+
+    <div class="chat-messages" id="chat-messages"></div>
+
+    <div class="chat-guest-notice" id="chat-guest-notice">
+      <p>Đăng nhập để tham gia trò chuyện với các thành viên đang online.</p>
+      <button type="button" class="btn btn-primary btn-sm" id="chat-login-btn">Đăng nhập →</button>
+    </div>
+
+    <form id="chat-form" class="chat-form" hidden>
+      <input type="text" id="chat-input" maxlength="500" placeholder="Nhập tin nhắn..." autocomplete="off" required />
+      <button type="submit" class="chat-send" aria-label="Gửi">➤</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/main.js?v=8"></script>
+<script type="module" src="js/auth.js?v=8"></script>
+<script type="module" src="js/chat.js?v=8"></script>
 </body>
 </html>
