@@ -268,6 +268,7 @@ profileForm.addEventListener("submit", function (e) {
   profileSaveBtn.disabled = true;
   profileSaveBtn.textContent = "Đang lưu...";
 
+  var hadNewAvatar = !!pendingAvatarDataUrl;
   var saved = true;
   if (pendingAvatarDataUrl) {
     saved = setLocalAvatar(auth.currentUser.uid, pendingAvatarDataUrl);
@@ -275,15 +276,16 @@ profileForm.addEventListener("submit", function (e) {
 
   updateProfile(auth.currentUser, { displayName: name })
     .then(function () {
-      if (!saved) {
-        profileError.textContent = "Đã lưu tên, nhưng trình duyệt từ chối lưu ảnh (bộ nhớ tạm đầy). Thử ảnh nhỏ hơn nhé.";
-      } else {
-        profileSuccess.textContent = pendingAvatarDataUrl
-          ? "Đã lưu thay đổi. Ảnh đang lưu trên trình duyệt này, chưa đồng bộ sang máy khác."
-          : "Đã lưu thay đổi.";
-      }
       pendingAvatarDataUrl = null;
       renderAuthArea(auth.currentUser);
+      if (!saved) {
+        profileError.textContent = "Đã lưu tên, nhưng trình duyệt từ chối lưu ảnh (bộ nhớ tạm đầy). Thử ảnh nhỏ hơn nhé.";
+        return;
+      }
+      profileSuccess.textContent = hadNewAvatar
+        ? "Đã lưu thay đổi. Ảnh đang lưu trên trình duyệt này, chưa đồng bộ sang máy khác."
+        : "Đã lưu thay đổi.";
+      setTimeout(function () { profileModal.close(); }, 900);
     })
     .catch(function (err) {
       profileError.textContent = friendlyError(err);
