@@ -14,9 +14,9 @@
   // theo từng bộ sách cụ thể — nên đối chiếu lại với SGK trung tâm đang dùng.
   var SUBJECT_CONTENT = {
     "Toán": {short:"T", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn (tự điền đáp số) — không còn phần tự luận.", duration:"90 phút", parts:["Phần I – Nhiều lựa chọn: 12 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 6 câu"], grades:{
-      "10":["Mệnh đề và tập hợp","Bất phương trình, hệ bất phương trình bậc nhất hai ẩn","Hệ thức lượng trong tam giác","Vectơ","Hàm số, đồ thị và ứng dụng","Thống kê","Xác suất"],
-      "11":["Hàm số lượng giác và phương trình lượng giác","Dãy số – Cấp số cộng – Cấp số nhân","Giới hạn – Hàm số liên tục","Đường thẳng và mặt phẳng trong không gian","Đạo hàm","Quan hệ vuông góc trong không gian"],
-      "12":["Ứng dụng đạo hàm khảo sát hàm số","Hàm số lũy thừa – mũ – lôgarit","Nguyên hàm – Tích phân","Vectơ và hệ tọa độ trong không gian","Phương trình mặt phẳng – đường thẳng – mặt cầu","Xác suất có điều kiện"]
+      "10":["Mệnh đề và tập hợp","Bất phương trình và hệ bất phương trình bậc nhất hai ẩn","Hàm số bậc hai và đồ thị","Bất phương trình bậc hai một ẩn","Đại số tổ hợp","Hệ thức lượng trong tam giác","Vectơ","Phương pháp tọa độ trong mặt phẳng","Thống kê","Xác suất"],
+      "11":["Hàm số lượng giác và phương trình lượng giác","Dãy số – Cấp số cộng – Cấp số nhân","Giới hạn – Hàm số liên tục","Hàm số mũ và hàm số lôgarit","Đạo hàm","Đường thẳng và mặt phẳng – Quan hệ song song trong không gian","Quan hệ vuông góc trong không gian","Các số đặc trưng đo xu thế trung tâm (mẫu số liệu ghép nhóm)","Xác suất (biến cố giao, biến cố hợp)","Chuyên đề: Lý thuyết đồ thị"],
+      "12":["Ứng dụng đạo hàm để khảo sát hàm số","Nguyên hàm – Tích phân","Vectơ và hệ tọa độ trong không gian","Phương trình mặt phẳng, đường thẳng, mặt cầu","Các số đặc trưng đo mức độ phân tán (mẫu số liệu ghép nhóm)","Xác suất có điều kiện"]
     }},
     "Ngữ Văn": {short:"Văn", format:"Tự luận, 2 phần: Đọc hiểu (ngữ liệu hoàn toàn ngoài SGK) và Viết (đoạn văn nghị luận xã hội + bài văn nghị luận văn học).", duration:"120 phút", parts:["Phần I – Đọc hiểu: 5 câu hỏi","Phần II – Viết đoạn văn nghị luận xã hội (~200 chữ)","Phần II – Viết bài văn nghị luận văn học"], grades:{
       "10":["Thần thoại và sử thi","Thơ trung đại Việt Nam","Kịch bản chèo – tuồng","Văn bản nghị luận","Truyện ngắn hiện đại"],
