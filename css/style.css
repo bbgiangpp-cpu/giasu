@@ -190,10 +190,10 @@ header.nav{
 .hero-photo{display:block;width:100%;height:auto;}
 
 .hero-copy{padding:26px 6px 4px;}
-.hero-copy h1{font-size:clamp(26px,3.4vw,40px);line-height:1.18;margin:14px 0 14px;color:var(--ink);}
+.hero-copy h1{font-size:clamp(24px,3vw,36px);line-height:1.16;margin:10px 0 10px;color:var(--ink);}
 .hero-copy h1 .accent{color:var(--accent-strong);}
-.hero-copy .lede{font-size:15.5px;color:var(--ink-soft);max-width:44ch;}
-.hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px;}
+.hero-copy .lede{font-size:14.5px;color:var(--ink-soft);max-width:44ch;}
+.hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:16px;}
 .link-ghost{font-weight:700;font-size:14.5px;color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
 .link-ghost:hover{color:var(--accent-strong);}
 
@@ -201,7 +201,7 @@ header.nav{
    directly on the photo, since its background stays light cream in both themes */
 @media (min-width:820px){
   .hero-copy{
-    position:absolute;top:9%;left:55%;right:4%;
+    position:absolute;top:4%;left:55%;right:4%;
     z-index:2;color:#3A2E4D;
   }
   .hero-copy h1{color:#3A2E4D;}
