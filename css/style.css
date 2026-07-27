@@ -535,6 +535,67 @@ dialog#subject-modal::backdrop{background:rgba(40,26,60,.45);backdrop-filter:blu
 
 .chapter-item.locked{opacity:.6;cursor:not-allowed;}
 .chapter-meta.locked-label{color:var(--ink-faint);}
+
+.grade-exam-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:4px;
+  background:var(--accent-tint);color:var(--accent-strong);border:1px dashed var(--accent-strong);
+  border-radius:14px;padding:12px 16px;font:inherit;font-weight:800;font-size:13.5px;cursor:pointer;
+}
+.grade-exam-btn:hover{background:var(--accent-strong);color:#fff;}
+.grade-exam-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+
+/* ---------- Full grade exam ---------- */
+dialog#exam-modal{
+  border:none;border-radius:22px;padding:0;width:min(760px,94vw);
+  max-height:min(820px,92vh);background:var(--surface);color:var(--ink);
+  box-shadow:var(--shadow);position:relative;
+}
+dialog#exam-modal::backdrop{background:rgba(40,26,60,.55);backdrop-filter:blur(2px);}
+:root[data-theme="dark"] dialog#exam-modal::backdrop{background:rgba(0,0,0,.65);}
+.exam-head{
+  display:flex;align-items:center;gap:14px;padding:20px 24px;border-bottom:1px solid var(--line);
+  background:var(--accent-tint);border-radius:22px 22px 0 0;
+}
+.exam-head h4{font-size:16.5px;margin-bottom:2px;}
+.exam-head span{font-size:12.5px;color:var(--ink-soft);}
+.exam-timer{
+  margin-left:auto;font-variant-numeric:tabular-nums;font-weight:800;font-size:18px;
+  background:var(--surface);border-radius:10px;padding:8px 14px;color:var(--accent-strong);flex:none;
+}
+.exam-timer.low{color:var(--coral);}
+.exam-disclaimer{margin:16px 24px 0;padding:10px 14px;background:var(--coral-tint);color:var(--coral);border-radius:10px;font-size:12px;line-height:1.5;}
+.exam-body{padding:16px 24px;overflow-y:auto;max-height:calc(min(820px,92vh) - 300px);}
+.exam-section-title{font-size:14px;font-weight:800;color:var(--accent-strong);margin:20px 0 10px;}
+.exam-section-title:first-child{margin-top:0;}
+.exam-q{background:var(--bg-panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+.exam-q-text{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:10px;display:block;}
+.exam-statement{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;font-size:13px;color:var(--ink);border-top:1px dashed var(--line);}
+.exam-statement:first-of-type{border-top:none;}
+.exam-statement-choice{display:flex;gap:12px;flex:none;}
+.exam-statement-choice label{display:flex;align-items:center;gap:4px;font-size:12.5px;cursor:pointer;}
+.exam-short-input{
+  width:100%;font:inherit;font-size:13.5px;padding:9px 12px;border-radius:9px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-top:4px;
+}
+.exam-image-row{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;}
+.exam-image-btn{
+  background:var(--bg-panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  font:inherit;font-size:12px;font-weight:700;color:var(--ink-soft);cursor:pointer;
+}
+.exam-image-hint{font-size:11.5px;color:var(--ink-faint);}
+.exam-image-preview{max-width:120px;max-height:80px;border-radius:8px;border:1px solid var(--line);object-fit:cover;}
+.exam-q.graded-correct{border-color:var(--sage);}
+.exam-q.graded-wrong{border-color:var(--coral);}
+.exam-q-points{float:right;font-size:12px;font-weight:800;color:var(--ink-faint);}
+.exam-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  padding:16px 24px;border-top:1px solid var(--line);
+}
+.exam-foot span{font-size:12.5px;color:var(--ink-faint);}
+.exam-result{margin:0 24px 20px;padding:16px;border-radius:14px;text-align:center;font-weight:800;font-size:15px;}
+.exam-result.pass{background:var(--sage-tint);color:var(--sage);}
+.exam-result.fail{background:var(--coral-tint);color:var(--coral);}
+.exam-result p{font-size:12.5px;font-weight:600;margin-top:6px;color:inherit;}
 .lesson-soon{background:var(--accent-tint);border-radius:14px;padding:16px;text-align:center;}
 .lesson-soon p{font-size:13.5px;color:var(--ink);line-height:1.6;}
 

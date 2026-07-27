@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gia Sư Online — Ôn thi theo đúng cấu trúc THPT 2025</title>
   <meta name="description" content="Nền tảng gia sư online 1-kèm-1: chọn môn bắt buộc và tự chọn theo đúng cấu trúc kỳ thi THPT 2025, theo dõi tiến độ học tập theo từng môn." />
-  <link rel="stylesheet" href="css/style.css?v=19" />
+  <link rel="stylesheet" href="css/style.css?v=20" />
 </head>
 <body>
 
@@ -295,6 +295,24 @@
   <div class="complete-toast" id="complete-toast" hidden>✓ Hoàn thành</div>
 </dialog>
 
+<dialog id="exam-modal">
+  <div class="exam-head">
+    <div>
+      <h4 id="exam-title">Bài kiểm tra cuối Lớp</h4>
+      <span id="exam-sub">90 phút · theo sườn đề thi minh họa 2025</span>
+    </div>
+    <div class="exam-timer" id="exam-timer">90:00</div>
+    <button type="button" class="modal-close" id="exam-close" aria-label="Đóng">✕</button>
+  </div>
+  <div class="exam-disclaimer">⚠️ Đề minh họa do trang tự soạn để luyện tập theo đúng sườn (Phần I/II/III) của kỳ thi 2025 — không phải đề thi chính thức.</div>
+  <div class="exam-body" id="exam-body"></div>
+  <div class="exam-foot">
+    <span id="exam-foot-note">Làm hết các câu rồi bấm Nộp bài</span>
+    <button type="button" class="btn btn-primary btn-sm" id="exam-submit-btn">Nộp bài</button>
+  </div>
+  <div class="exam-result" id="exam-result" hidden></div>
+</dialog>
+
 <dialog id="login-modal">
   <div class="modal-head">
     <span class="modal-badge" id="login-modal-badge">🔐</span>
@@ -458,9 +476,9 @@
   </div>
 </div>
 
-<script src="js/main.js?v=19"></script>
-<script type="module" src="js/auth.js?v=19"></script>
-<script type="module" src="js/chat.js?v=19"></script>
-<script type="module" src="js/ai-assistant.js?v=19"></script>
+<script src="js/main.js?v=20"></script>
+<script type="module" src="js/auth.js?v=20"></script>
+<script type="module" src="js/chat.js?v=20"></script>
+<script type="module" src="js/ai-assistant.js?v=20"></script>
 </body>
 </html>

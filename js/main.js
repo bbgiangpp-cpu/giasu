@@ -383,6 +383,61 @@
     }
   };
 
+  // Đề kiểm tra cuối lớp (90 phút), theo đúng sườn Phần I/II/III của định dạng thi 2025.
+  // Đề + đáp án do trang tự soạn để luyện tập — KHÔNG phải đề thi chính thức của Bộ GD&ĐT.
+  var EXAM_CONTENT = {
+    "Toán::10": {
+      partI: [
+        { q: "Mệnh đề nào sau đây đúng?", options: ["∀x∈R, x²>0", "∃x∈R, x²<0", "∀x∈R, x²≥0", "∃x∈R, x+1=x"], correct: 2 },
+        { q: "Cho A=(1;6], B=[3;8). Tập A∩B là:", options: ["[3;6]", "(3;6)", "[3;6)", "(3;8)"], correct: 0 },
+        { q: "Miền nghiệm của hệ x≥0, y≥0, x+y≤5 là tam giác có diện tích bằng:", options: ["12,5", "25", "5", "10"], correct: 0 },
+        { q: "Parabol y=2x²−8x+5 có hoành độ đỉnh bằng:", options: ["2", "−2", "4", "1"], correct: 0 },
+        { q: "Tập nghiệm của x²−6x+8<0 là:", options: ["(2;4)", "(−∞;2)∪(4;+∞)", "[2;4]", "R"], correct: 0 },
+        { q: "Số cách chọn 4 học sinh từ 12 học sinh (không phân biệt vai trò) là:", options: ["495", "11880", "48", "1980"], correct: 0 },
+        { q: "Hệ số của x³ trong khai triển (x+3)⁵ là:", options: ["90", "10", "270", "15"], correct: 0 },
+        { q: "Tam giác đều cạnh a có diện tích là:", options: ["a²√3/4", "a²/2", "a²√2/4", "a²√3/2"], correct: 0 },
+        { q: "Cho A(2;1), B(5;5). Độ dài đoạn AB là:", options: ["5", "7", "25", "3"], correct: 0 },
+        { q: "Khoảng cách từ điểm (1;2) đến đường thẳng 3x−4y+5=0 là:", options: ["0", "1", "2", "5"], correct: 0 },
+        { q: "Mẫu số liệu 5, 7, 7, 9, 12 có trung vị bằng:", options: ["7", "8", "9", "6"], correct: 0 },
+        { q: "Gieo hai con xúc xắc, xác suất để tổng số chấm bằng 10 là:", options: ["1/12", "1/6", "1/9", "5/36"], correct: 0 }
+      ],
+      partII: [
+        { q: "Cho hàm số y=x²−4x+3.", statements: [
+            "Đỉnh của đồ thị hàm số là I(2;−1).",
+            "Hàm số nghịch biến trên khoảng (2;+∞).",
+            "Đồ thị cắt trục hoành tại hai điểm phân biệt.",
+            "Giá trị nhỏ nhất của hàm số trên R bằng −1."
+          ], correct: [true, false, true, true] },
+        { q: "Cho hai tập hợp A=[−2;4], B=(1;6).", statements: [
+            "A∩B = (1;4].",
+            "A∪B = [−2;6).",
+            "A\\B = [−2;1].",
+            "B\\A = [4;6)."
+          ], correct: [true, true, true, false] },
+        { q: "Cho hai vectơ a⃗=(3;4), b⃗=(−1;2).", statements: [
+            "|a⃗| = 5.",
+            "a⃗·b⃗ = 5.",
+            "a⃗ và b⃗ vuông góc với nhau.",
+            "a⃗+b⃗ = (2;6)."
+          ], correct: [true, true, false, true] },
+        { q: "Một hộp có 5 viên bi đỏ và 3 viên bi xanh. Lấy ngẫu nhiên đồng thời 2 viên.", statements: [
+            "Số cách lấy 2 viên bất kỳ là C(8,2) = 28.",
+            "Số cách lấy được 2 viên cùng màu đỏ là C(5,2) = 10.",
+            "Xác suất lấy được 2 viên khác màu là 15/28.",
+            "Xác suất lấy được 2 viên đều màu xanh là 1/28."
+          ], correct: [true, true, true, false] }
+      ],
+      partIII: [
+        { q: "Có bao nhiêu số tự nhiên có 4 chữ số đôi một khác nhau lập từ các chữ số 1, 2, 3, 4, 5, 6?", answers: ["360"] },
+        { q: "Tìm giá trị nhỏ nhất của hàm số y=x²−6x+11 trên R.", answers: ["2"] },
+        { q: "Tìm số nghiệm nguyên của bất phương trình x²−5x+4≤0.", answers: ["4"] },
+        { q: "Một túi có 4 bi trắng và 6 bi đen. Lấy ngẫu nhiên 1 bi. Tính xác suất lấy được bi trắng (nhập dạng phân số tối giản a/b).", answers: ["2/5", "0.4", "0,4"] },
+        { q: "Trong mặt phẳng Oxy, cho tam giác ABC với A(1;2), B(4;6), C(7;2). Tính diện tích tam giác ABC.", answers: ["12"], requiresImage: true },
+        { q: "Một cột đèn cao 6m tạo bóng dài 8m trên mặt đất. Tính góc tạo bởi tia nắng với mặt đất (làm tròn đến độ, nhập số nguyên độ).", range: [36, 38], requiresImage: true }
+      ]
+    }
+  };
+
   // Ngân hàng câu hỏi trắc nghiệm (mỗi chương 8 câu, mỗi lần làm bài chọn ngẫu nhiên 5 câu
   // + xáo trộn thứ tự đáp án — nên mỗi lượt làm lại sẽ ra một đề khác).
   var QUIZ_CONTENT = {
@@ -793,6 +848,223 @@
     renderQuiz(currentSubject, currentChapter);
   });
 
+  // ---- Full grade-end exam (90 phút) ----
+  var examModal = document.getElementById("exam-modal");
+  var examClose = document.getElementById("exam-close");
+  var examTitle = document.getElementById("exam-title");
+  var examTimerEl = document.getElementById("exam-timer");
+  var examBody = document.getElementById("exam-body");
+  var examSubmitBtn = document.getElementById("exam-submit-btn");
+  var examFootNote = document.getElementById("exam-foot-note");
+  var examResult = document.getElementById("exam-result");
+  var examTimerInterval = null;
+  var examSecondsLeft = 0;
+  var examImages = {}; // in-memory only, cleared when the exam modal closes
+
+  function normalizeAnswer(str){
+    return String(str || "").trim().toLowerCase().replace(/,/g, ".").replace(/\s+/g, "");
+  }
+
+  function formatTime(totalSeconds){
+    var m = Math.floor(totalSeconds / 60);
+    var s = totalSeconds % 60;
+    return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+  }
+
+  function tickExamTimer(){
+    examSecondsLeft--;
+    examTimerEl.textContent = formatTime(Math.max(0, examSecondsLeft));
+    examTimerEl.classList.toggle("low", examSecondsLeft <= 300);
+    if (examSecondsLeft <= 0) {
+      clearInterval(examTimerInterval);
+      submitExam(true);
+    }
+  }
+
+  function openExam(subject, grade, color){
+    var exam = EXAM_CONTENT[subject + "::" + grade];
+    if (!exam) return;
+    currentExamData = exam;
+    modal.close();
+    examModal.style.setProperty("--modal-accent", color.accent);
+    examModal.style.setProperty("--modal-accent-tint", color.tint);
+    examTitle.textContent = "Bài kiểm tra cuối Lớp " + grade + " — " + subject;
+    examImages = {};
+    examResult.hidden = true;
+    examResult.className = "exam-result";
+    examSubmitBtn.hidden = false;
+    examSubmitBtn.disabled = false;
+    examFootNote.textContent = "Làm hết các câu rồi bấm Nộp bài";
+
+    examBody.innerHTML = "";
+
+    var titleI = document.createElement("div");
+    titleI.className = "exam-section-title";
+    titleI.textContent = "PHẦN I — Trắc nghiệm nhiều lựa chọn (mỗi câu 0,25 điểm)";
+    examBody.appendChild(titleI);
+    exam.partI.forEach(function(item, qi){
+      var block = document.createElement("div");
+      block.className = "exam-q";
+      block.dataset.part = "1";
+      block.dataset.index = qi;
+      var optionsHtml = item.options.map(function(opt, oi){
+        return '<label class="quiz-option"><input type="radio" name="exam1-' + qi + '" value="' + oi + '" />' + opt + '</label>';
+      }).join("");
+      block.innerHTML =
+        '<span class="exam-q-text">Câu ' + (qi + 1) + '. ' + item.q + '</span>' +
+        '<div class="quiz-options">' + optionsHtml + '</div>';
+      examBody.appendChild(block);
+    });
+
+    var titleII = document.createElement("div");
+    titleII.className = "exam-section-title";
+    titleII.textContent = "PHẦN II — Đúng/Sai (đúng 1 ý: 0,1đ · 2 ý: 0,25đ · 3 ý: 0,5đ · cả 4 ý: 1đ)";
+    examBody.appendChild(titleII);
+    exam.partII.forEach(function(item, qi){
+      var block = document.createElement("div");
+      block.className = "exam-q";
+      block.dataset.part = "2";
+      block.dataset.index = qi;
+      var statementsHtml = item.statements.map(function(st, si){
+        var letter = String.fromCharCode(97 + si);
+        return '<div class="exam-statement">' +
+          '<span>' + letter + ') ' + st + '</span>' +
+          '<span class="exam-statement-choice">' +
+            '<label><input type="radio" name="exam2-' + qi + '-' + si + '" value="true" /> Đúng</label>' +
+            '<label><input type="radio" name="exam2-' + qi + '-' + si + '" value="false" /> Sai</label>' +
+          '</span>' +
+        '</div>';
+      }).join("");
+      block.innerHTML = '<span class="exam-q-text">Câu ' + (qi + 1) + '. ' + item.q + '</span>' + statementsHtml;
+      examBody.appendChild(block);
+    });
+
+    var titleIII = document.createElement("div");
+    titleIII.className = "exam-section-title";
+    titleIII.textContent = "PHẦN III — Trả lời ngắn (mỗi câu 0,5 điểm)";
+    examBody.appendChild(titleIII);
+    exam.partIII.forEach(function(item, qi){
+      var block = document.createElement("div");
+      block.className = "exam-q";
+      block.dataset.part = "3";
+      block.dataset.index = qi;
+      block.innerHTML =
+        '<span class="exam-q-text">Câu ' + (qi + 1) + '. ' + item.q + '</span>' +
+        '<input type="text" class="exam-short-input" placeholder="Nhập đáp án..." />';
+      if (item.requiresImage) {
+        var imgRow = document.createElement("div");
+        imgRow.className = "exam-image-row";
+        imgRow.innerHTML =
+          '<label class="exam-image-btn">📷 Tải ảnh lời giải<input type="file" accept="image/*" hidden /></label>' +
+          '<span class="exam-image-hint">Không tính vào điểm tự động — gia sư sẽ xem phần trình bày.</span>';
+        var fileInput = imgRow.querySelector('input[type="file"]');
+        fileInput.addEventListener("change", function(){
+          var file = fileInput.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function(){
+            examImages[qi] = reader.result;
+            var existingPreview = imgRow.querySelector(".exam-image-preview");
+            if (existingPreview) existingPreview.remove();
+            var img = document.createElement("img");
+            img.className = "exam-image-preview";
+            img.src = reader.result;
+            imgRow.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        });
+        block.appendChild(imgRow);
+      }
+      examBody.appendChild(block);
+    });
+
+    examSecondsLeft = (exam.duration || 90) * 60;
+    examTimerEl.textContent = formatTime(examSecondsLeft);
+    examTimerEl.classList.remove("low");
+    clearInterval(examTimerInterval);
+    examTimerInterval = setInterval(tickExamTimer, 1000);
+
+    examModal.showModal();
+  }
+
+  function submitExam(auto){
+    clearInterval(examTimerInterval);
+    examSubmitBtn.hidden = true;
+
+    var totalPoints = 0;
+
+    Array.prototype.forEach.call(examBody.querySelectorAll('.exam-q[data-part="1"]'), function(block){
+      var qi = Number(block.dataset.index);
+      var item = currentExamData.partI[qi];
+      var checked = block.querySelector('input[name="exam1-' + qi + '"]:checked');
+      var isCorrect = checked && Number(checked.value) === item.correct;
+      if (isCorrect) totalPoints += 0.25;
+      block.classList.add(isCorrect ? "graded-correct" : "graded-wrong");
+      var options = block.querySelectorAll(".quiz-option");
+      options[item.correct].classList.add("right-answer");
+      if (checked && !isCorrect) options[Number(checked.value)].classList.add("wrong-answer");
+      Array.prototype.forEach.call(block.querySelectorAll("input"), function(inp){ inp.disabled = true; });
+    });
+
+    Array.prototype.forEach.call(examBody.querySelectorAll('.exam-q[data-part="2"]'), function(block){
+      var qi = Number(block.dataset.index);
+      var item = currentExamData.partII[qi];
+      var correctCount = 0;
+      item.correct.forEach(function(ans, si){
+        var checked = block.querySelector('input[name="exam2-' + qi + '-' + si + '"]:checked');
+        if (checked && (checked.value === "true") === ans) correctCount++;
+        Array.prototype.forEach.call(block.querySelectorAll('input[name="exam2-' + qi + '-' + si + '"]'), function(inp){ inp.disabled = true; });
+      });
+      var pts = correctCount === 1 ? 0.1 : correctCount === 2 ? 0.25 : correctCount === 3 ? 0.5 : correctCount === 4 ? 1 : 0;
+      totalPoints += pts;
+      if (correctCount === 4) block.classList.add("graded-correct");
+      else if (correctCount === 0) block.classList.add("graded-wrong");
+    });
+
+    Array.prototype.forEach.call(examBody.querySelectorAll('.exam-q[data-part="3"]'), function(block){
+      var qi = Number(block.dataset.index);
+      var item = currentExamData.partIII[qi];
+      var input = block.querySelector(".exam-short-input");
+      input.disabled = true;
+      var given = normalizeAnswer(input.value);
+      var isCorrect = false;
+      if (item.range) {
+        var num = parseFloat(given);
+        isCorrect = !isNaN(num) && num >= item.range[0] && num <= item.range[1];
+      } else {
+        isCorrect = item.answers.some(function(a){ return normalizeAnswer(a) === given; });
+      }
+      if (isCorrect) totalPoints += 0.5;
+      block.classList.add(isCorrect ? "graded-correct" : "graded-wrong");
+    });
+
+    var score = Math.round(totalPoints * 100) / 100;
+    var passed = score > PASS_SCORE;
+    examResult.hidden = false;
+    examResult.className = "exam-result " + (passed ? "pass" : "fail");
+    examResult.innerHTML =
+      (auto ? "⏰ Hết giờ — bài đã được nộp tự động.<br>" : "") +
+      "Điểm: <b>" + score + "/10</b>" +
+      "<p>" + (passed
+        ? "🎉 Đạt yêu cầu (trên " + PASS_SCORE + " điểm)! Ô đúng được tô xanh, ô bạn chọn sai được tô đỏ."
+        : "Chưa đạt (cần trên " + PASS_SCORE + " điểm). Xem lại phần tô đỏ rồi ôn tập thêm nhé.") + "</p>";
+    examFootNote.textContent = "Đã nộp bài";
+  }
+
+  examSubmitBtn.addEventListener("click", function(){ submitExam(false); });
+  examClose.addEventListener("click", function(){
+    clearInterval(examTimerInterval);
+    examImages = {};
+    examModal.close();
+  });
+  examModal.addEventListener("click", function(e){
+    var box = examModal.getBoundingClientRect();
+    var inside = e.clientX >= box.left && e.clientX <= box.right && e.clientY >= box.top && e.clientY <= box.bottom;
+    if (!inside) { clearInterval(examTimerInterval); examImages = {}; examModal.close(); }
+  });
+
+  var currentExamData = null;
+
   function openSubjectModal(subject, tagLabel, color){
     var data = SUBJECT_CONTENT[subject] || {short:subject.slice(0,2), grades:{"12":["Nội dung đang được cập nhật"]}};
     currentSubject = subject;
@@ -856,6 +1128,14 @@
         group.appendChild(row);
         currentFlatChapters.push({ name: ch, row: row });
       });
+      if (EXAM_CONTENT[subject + "::" + grade]) {
+        var examBtn = document.createElement("button");
+        examBtn.type = "button";
+        examBtn.className = "grade-exam-btn";
+        examBtn.textContent = "📝 Bài kiểm tra cuối Lớp " + grade + " (90 phút)";
+        examBtn.addEventListener("click", function(){ openExam(subject, grade, color); });
+        group.appendChild(examBtn);
+      }
       chapterList.appendChild(group);
     });
 
