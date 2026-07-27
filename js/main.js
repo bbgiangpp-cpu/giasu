@@ -131,4 +131,20 @@
       openSubjectModal(subject, tag, color);
     });
   });
+
+  // Scroll-reveal: fade + slide up each card/section as it enters the viewport.
+  var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealTargets = document.querySelectorAll(".subj-card, .assess-card, .reform-banner, .cta-banner");
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    revealTargets.forEach(function(el){ el.classList.add("reveal"); });
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.15, rootMargin: "0px 0px -40px 0px"});
+    revealTargets.forEach(function(el){ observer.observe(el); });
+  }
 })();

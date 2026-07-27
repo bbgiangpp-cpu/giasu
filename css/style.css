@@ -125,13 +125,20 @@ header.nav{
 }
 .btn:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
 .btn-primary{
+  position:relative;overflow:hidden;
   background:linear-gradient(140deg,var(--accent),var(--accent-strong));
   color:#fff; box-shadow:var(--shadow-sm);
   transition:transform .15s, box-shadow .15s;
 }
-.btn-primary:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+.btn-primary:hover{transform:translateY(-2px) scale(1.02); box-shadow:var(--shadow);}
+.btn-primary::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+  transform:translateX(-120%);transition:transform .6s ease;
+}
+.btn-primary:hover::after{transform:translateX(120%);}
 .btn-sm{padding:9px 18px;font-size:13.5px;}
-@media(prefers-reduced-motion:reduce){ .btn-primary{transition:none;} .btn-primary:hover{transform:none;} }
+@media(prefers-reduced-motion:reduce){ .btn-primary{transition:none;} .btn-primary:hover{transform:none;} .btn-primary::after{display:none;} }
 @media (max-width:1060px){ .nav-links{display:none;} }
 
 /* ---------- Hero ---------- */
@@ -217,10 +224,30 @@ header.nav{
   position:absolute;background:var(--surface);border-radius:16px;box-shadow:var(--shadow);
   padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;
   border:1px solid var(--line);
+  animation:float-chip-bob 4.5s ease-in-out infinite;
 }
-.float-chip.c1{top:6%;right:0%;color:var(--sage);}
-.float-chip.c2{bottom:4%;right:6%;color:var(--accent-strong);}
+.float-chip.c1{top:6%;right:0%;color:var(--sage);animation-delay:0s;}
+.float-chip.c2{bottom:4%;right:6%;color:var(--accent-strong);animation-delay:1.4s;}
 .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none;}
+
+@keyframes float-chip-bob{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-7px);}
+}
+.blob{animation:blob-drift 9s ease-in-out infinite;}
+.blob-2{animation-delay:2.2s;}
+@keyframes blob-drift{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(-3%,3%) scale(1.06);}
+}
+.person{animation:person-sway 6s ease-in-out infinite;transform-origin:bottom center;}
+@keyframes person-sway{
+  0%,100%{transform:rotate(0deg);}
+  50%{transform:rotate(-1.5deg);}
+}
+@media(prefers-reduced-motion:reduce){
+  .float-chip,.blob,.person{animation:none;}
+}
 
 /* ---------- Reform notice ---------- */
 .reform-banner{
@@ -252,18 +279,20 @@ header.nav{
   display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-sm);
   text-align:left;font:inherit;color:inherit;cursor:pointer;transition:transform .18s;
 }
-.subj-card:hover{transform:translateY(-4px);}
-@media(prefers-reduced-motion:reduce){.subj-card{transition:none;} .subj-card:hover{transform:none;}}
+.subj-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.subj-card:hover .subj-icon{transform:scale(1.12) rotate(-6deg);}
+.subj-card:hover .arrow-chip{transform:translateX(3px);}
+@media(prefers-reduced-motion:reduce){.subj-card,.subj-icon,.arrow-chip{transition:none;} .subj-card:hover{transform:none;} .subj-card:hover .subj-icon{transform:none;} .subj-card:hover .arrow-chip{transform:none;}}
 .subj-card:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
 .subj-card .top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
-.subj-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex:none;}
+.subj-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex:none;transition:transform .25s ease;}
 .tag-pill{font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap;}
 .tag-pill.required{background:var(--accent-tint);color:var(--accent-strong);}
 .tag-pill.elective{background:var(--bg-panel);color:var(--ink-faint);}
 .subj-card h3{font-size:16.5px;}
 .subj-card p{color:var(--ink-soft);font-size:13.5px;}
 .subj-card .go{margin-top:auto;display:flex;align-items:center;justify-content:flex-end;}
-.arrow-chip{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+.arrow-chip{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .25s ease;}
 
 .mandatory-card{padding:30px;}
 .mandatory-card .subj-icon{width:58px;height:58px;font-size:19px;}
@@ -301,6 +330,10 @@ header.nav{
 .cta-banner p{color:var(--ink-soft);font-size:14.5px;}
 
 footer{padding:36px 0 56px;text-align:center;color:var(--ink-faint);font-size:13.5px;}
+
+/* ---------- Scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease, transform .55s ease;}
+.reveal-in{opacity:1;transform:translateY(0);}
 
 /* ---------- Subject modal ---------- */
 dialog#subject-modal{
