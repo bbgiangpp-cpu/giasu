@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gia Sư Online — Ôn thi theo đúng cấu trúc THPT 2025</title>
   <meta name="description" content="Nền tảng gia sư online 1-kèm-1: chọn môn bắt buộc và tự chọn theo đúng cấu trúc kỳ thi THPT 2025, theo dõi tiến độ học tập theo từng môn." />
-  <link rel="stylesheet" href="css/style.css?v=18" />
+  <link rel="stylesheet" href="css/style.css?v=19" />
 </head>
 <body>
 
@@ -269,6 +269,17 @@
         <div id="lesson-practice"></div>
       </div>
 
+      <div class="lesson-block" id="lesson-quiz-block">
+        <span class="lesson-label">🧪 Bài kiểm tra trắc nghiệm</span>
+        <p class="quiz-intro">Trả lời đúng <b>trên 7/10 điểm</b> để mở khóa chương tiếp theo. Làm lại sẽ đổi bộ câu hỏi khác.</p>
+        <div id="quiz-questions"></div>
+        <div class="quiz-actions">
+          <button type="button" class="btn btn-primary btn-sm" id="quiz-submit-btn">Nộp bài</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="quiz-retry-btn" hidden>🔄 Làm lại đề khác</button>
+        </div>
+        <div class="quiz-result" id="quiz-result" hidden></div>
+      </div>
+
       <div class="lesson-soon" id="lesson-soon" hidden>
         <p>📚 Bài giảng chi tiết cho chương này đang được gia sư biên soạn — sẽ sớm cập nhật. Bạn có thể đăng ký học để được giảng trực tiếp ngay bây giờ.</p>
       </div>
@@ -447,9 +458,9 @@
   </div>
 </div>
 
-<script src="js/main.js?v=18"></script>
-<script type="module" src="js/auth.js?v=18"></script>
-<script type="module" src="js/chat.js?v=18"></script>
-<script type="module" src="js/ai-assistant.js?v=18"></script>
+<script src="js/main.js?v=19"></script>
+<script type="module" src="js/auth.js?v=19"></script>
+<script type="module" src="js/chat.js?v=19"></script>
+<script type="module" src="js/ai-assistant.js?v=19"></script>
 </body>
 </html>

@@ -383,6 +383,111 @@
     }
   };
 
+  // Ngân hàng câu hỏi trắc nghiệm (mỗi chương 8 câu, mỗi lần làm bài chọn ngẫu nhiên 5 câu
+  // + xáo trộn thứ tự đáp án — nên mỗi lượt làm lại sẽ ra một đề khác).
+  var QUIZ_CONTENT = {
+    "Toán::Mệnh đề và tập hợp": [
+      { q: "Mệnh đề nào sau đây là mệnh đề chứa biến?", options: ["3 + 5 = 8", "Hà Nội là thủ đô Việt Nam", "x + 2 = 5", "2 là số nguyên tố"], correct: 2 },
+      { q: "Phủ định của mệnh đề \"∀x∈R, x²≥0\" là:", options: ["∀x∈R, x²<0", "∃x∈R, x²<0", "∃x∈R, x²≥0", "∀x∈R, x²>0"], correct: 1 },
+      { q: "Cho A=[1;5], B=(3;7). Tập A∩B là:", options: ["(3;5]", "[1;7)", "(1;3)", "[5;7)"], correct: 0 },
+      { q: "Tập hợp nào sau đây là tập rỗng?", options: ["{x∈R | x²=1}", "{x∈N | x<0}", "{x∈R | x≥0}", "{0}"], correct: 1 },
+      { q: "Mệnh đề đảo của \"Nếu a=b thì a²=b²\" là:", options: ["Nếu a²=b² thì a=b", "Nếu a≠b thì a²≠b²", "Nếu a²≠b² thì a≠b", "a=b khi và chỉ khi a²=b²"], correct: 0 },
+      { q: "(Khó) Cho mệnh đề P⇒Q đúng và Q sai. Kết luận nào đúng về P?", options: ["P đúng", "P sai", "Không xác định được", "P và Q đều sai"], correct: 1 },
+      { q: "Cho A={1,2,3}, B={2,3,4}. Số phần tử của A∪B là:", options: ["3", "4", "5", "6"], correct: 1 },
+      { q: "(Khó) Cho |A|=10, |B|=7, |A∩B|=4. Tính |A∪B|.", options: ["13", "17", "11", "21"], correct: 0 }
+    ],
+    "Toán::Bất phương trình và hệ bất phương trình bậc nhất hai ẩn": [
+      { q: "Bất phương trình nào là bậc nhất hai ẩn?", options: ["x²+y≤3", "2x−3y>5", "xy≤4", "x+y²≥0"], correct: 1 },
+      { q: "Miền nghiệm của x+y≤0 chứa điểm nào?", options: ["(1;1)", "(0;0)", "(2;3)", "(5;1)"], correct: 1 },
+      { q: "Đường thẳng nào là biên của miền nghiệm 2x−y≤4?", options: ["2x−y=4", "2x+y=4", "x−2y=4", "x+y=4"], correct: 0 },
+      { q: "Hệ x≥0, y≥0, x+y≤6 có miền nghiệm là hình gì?", options: ["Đường thẳng", "Tam giác", "Hình tròn", "Nửa mặt phẳng không giới hạn"], correct: 1 },
+      { q: "Với hệ ở câu trên, giá trị lớn nhất của F=x+y trên miền nghiệm là:", options: ["0", "3", "6", "Không xác định"], correct: 2 },
+      { q: "(Khó) Miền nghiệm là tam giác đỉnh (0;0), (4;0), (0;6). Giá trị lớn nhất của F=2x+3y là:", options: ["8", "18", "24", "0"], correct: 1 },
+      { q: "Bất phương trình x−y>0 có miền nghiệm là:", options: ["Phía trên đường thẳng y=x", "Phía dưới đường thẳng y=x", "Toàn mặt phẳng", "Chính đường thẳng y=x"], correct: 1 },
+      { q: "(Khó) Miền nghiệm hệ 2x+y≤10, x+3y≤15, x,y≥0 có các đỉnh (0,0),(5,0),(3,4),(0,5). F=4x+3y đạt max tại đỉnh nào?", options: ["(0,0)", "(5,0)", "(3,4)", "(0,5)"], correct: 2 }
+    ],
+    "Toán::Hàm số bậc hai và đồ thị": [
+      { q: "Tập xác định của hàm số y=√(x−2) là:", options: ["R", "[2;+∞)", "(2;+∞)", "(−∞;2]"], correct: 1 },
+      { q: "Đỉnh của parabol y=x²−6x+8 là:", options: ["(3;−1)", "(3;1)", "(−3;−1)", "(6;8)"], correct: 0 },
+      { q: "Parabol y=−x²+4x−3 quay bề lõm về hướng nào?", options: ["Lên trên", "Xuống dưới", "Sang trái", "Sang phải"], correct: 1 },
+      { q: "Số giao điểm của y=x²−2x+5 với trục hoành là:", options: ["0", "1", "2", "Vô số"], correct: 0 },
+      { q: "Hàm số y=2x²−4x+1 đồng biến trên khoảng nào?", options: ["(−∞;1)", "(1;+∞)", "(−∞;+∞)", "(−1;1)"], correct: 1 },
+      { q: "(Khó) Quỹ đạo h(t)=−4,9t²+30t. Thời điểm vật đạt độ cao lớn nhất là:", options: ["≈1,5s", "≈3,06s", "≈6,12s", "≈9s"], correct: 1 },
+      { q: "Trục đối xứng của y=3x²+6x−2 là:", options: ["x=1", "x=−1", "x=2", "x=−2"], correct: 1 },
+      { q: "(Khó) Giá trị nhỏ nhất của y=x²−4x+7 trên R là:", options: ["3", "7", "−3", "4"], correct: 0 }
+    ],
+    "Toán::Bất phương trình bậc hai một ẩn": [
+      { q: "Tập nghiệm của x²−9≤0 là:", options: ["[−3;3]", "(−3;3)", "(−∞;−3]∪[3;+∞)", "[3;+∞)"], correct: 0 },
+      { q: "Tam thức f(x)=x²−4x+4 có dấu như thế nào với x≠2?", options: ["Luôn dương", "Luôn âm", "Luôn dương với x≠2, bằng 0 tại x=2", "Đổi dấu"], correct: 2 },
+      { q: "Bất phương trình x²+x+1>0 có tập nghiệm là:", options: ["R", "∅", "(−1;1)", "(0;+∞)"], correct: 0 },
+      { q: "Nghiệm của −2x²+3x+2≥0 là:", options: ["[−0,5;2]", "(−∞;−0,5]∪[2;+∞)", "(−0,5;2)", "R"], correct: 0 },
+      { q: "Điều kiện xác định của √(x²+2x−3)=√(2x+5) là:", options: ["x≥−2,5", "x≥0", "x≤−2,5", "x≥3"], correct: 0 },
+      { q: "(Khó) Giải phương trình ở câu trên, nghiệm là:", options: ["x=2√2", "x=±2√2", "x=−2√2", "Vô nghiệm"], correct: 0 },
+      { q: "Với giá trị nào của m thì x²−2x+m=0 vô nghiệm?", options: ["m>1", "m<1", "m=1", "m≥1"], correct: 0 },
+      { q: "(Khó) Tìm m để x²−2mx+m+2≥0 với mọi x.", options: ["−1≤m≤2", "m≤−1", "m≥2", "−2≤m≤1"], correct: 0 }
+    ],
+    "Toán::Đại số tổ hợp": [
+      { q: "Giá trị của 5! là:", options: ["60", "100", "120", "24"], correct: 2 },
+      { q: "Số cách chọn 3 người từ 8 người (không phân biệt vai trò) là:", options: ["336", "56", "24", "512"], correct: 1 },
+      { q: "Số cách xếp thứ tự 4 người vào 4 ghế là:", options: ["12", "16", "24", "256"], correct: 2 },
+      { q: "A(5,2) bằng:", options: ["10", "20", "25", "60"], correct: 1 },
+      { q: "Hệ số của x³ trong khai triển (x+1)⁵ là:", options: ["5", "10", "15", "20"], correct: 1 },
+      { q: "(Khó) Có bao nhiêu cách chọn 2 táo và 3 cam từ 5 táo và 6 cam khác nhau?", options: ["60", "200", "30", "15"], correct: 1 },
+      { q: "Số hạng tổng quát trong khai triển (a+b)ⁿ là:", options: ["C(n,k)aᵏb^(n−k)", "n!·aᵏ", "aⁿ+bⁿ", "n·a·b"], correct: 0 },
+      { q: "(Khó) Hệ số của x² trong khai triển (2x−1)⁴ là:", options: ["24", "−24", "8", "16"], correct: 0 }
+    ],
+    "Toán::Hệ thức lượng trong tam giác": [
+      { q: "Định lý cosin cho cạnh a là:", options: ["a²=b²+c²−2bc·cosA", "a²=b²+c²+2bc·cosA", "a=b+c−2bc·cosA", "a²=b²−c²"], correct: 0 },
+      { q: "Theo định lý sin, a/sinA bằng:", options: ["R", "2R", "R/2", "4R"], correct: 1 },
+      { q: "sin150° bằng:", options: ["0,5", "−0,5", "√3/2", "1"], correct: 0 },
+      { q: "Diện tích tam giác với 2 cạnh b, c và góc xen giữa A là:", options: ["(1/2)bc·sinA", "bc·sinA", "(1/2)bc·cosA", "bc"], correct: 0 },
+      { q: "Tam giác có a=5, b=5, C=60° thì cạnh c bằng:", options: ["5", "25", "√50", "10"], correct: 0 },
+      { q: "(Khó) Tam giác có a=8, b=5, c=7. Tính cosA.", options: ["1/7", "7", "−1/7", "1/2"], correct: 0 },
+      { q: "Hai góc phụ nhau có tổng bằng:", options: ["90°", "180°", "360°", "45°"], correct: 0 },
+      { q: "(Khó) Tam giác có A=30°, b=10, c=10√3. Tính a.", options: ["10", "20", "10√3", "100"], correct: 0 }
+    ],
+    "Toán::Vectơ": [
+      { q: "Hai vectơ bằng nhau khi:", options: ["Cùng phương", "Cùng hướng và cùng độ dài", "Cùng độ dài", "Ngược hướng"], correct: 1 },
+      { q: "Vectơ AB + vectơ BA bằng:", options: ["Vectơ AB", "2 vectơ AB", "Vectơ-không", "Vectơ BA"], correct: 2 },
+      { q: "Cho A(2;3), B(5;7). Tọa độ vectơ AB là:", options: ["(3;4)", "(7;10)", "(−3;−4)", "(2;3)"], correct: 0 },
+      { q: "Tích vô hướng của hai vectơ vuông góc bằng:", options: ["1", "0", "−1", "|a||b|"], correct: 1 },
+      { q: "Độ dài vectơ a=(6;8) là:", options: ["10", "14", "100", "48"], correct: 0 },
+      { q: "(Khó) Cho A(1;1), B(4;5). Tính |AB|.", options: ["5", "7", "3", "25"], correct: 0 },
+      { q: "Trọng tâm tam giác A(0;0), B(6;0), C(0;6) là:", options: ["(3;3)", "(2;2)", "(6;6)", "(0;0)"], correct: 1 },
+      { q: "(Khó) Cho a=(1;2), b=(3;−1). Tính a·b.", options: ["1", "−1", "5", "3"], correct: 0 }
+    ],
+    "Toán::Phương pháp tọa độ trong mặt phẳng": [
+      { q: "Đường thẳng ax+by+c=0 có vectơ pháp tuyến là:", options: ["(a;b)", "(b;a)", "(−a;b)", "(a;c)"], correct: 0 },
+      { q: "Khoảng cách từ O(0;0) đến đường thẳng 3x+4y−10=0 là:", options: ["2", "10", "5", "0,5"], correct: 0 },
+      { q: "Phương trình đường tròn tâm (0;0) bán kính 4 là:", options: ["x²+y²=16", "x²+y²=4", "x²+y²=8", "(x−4)²+y²=0"], correct: 0 },
+      { q: "Hai đường thẳng có vectơ pháp tuyến (1;2) và (2;4) thì:", options: ["Vuông góc", "Song song hoặc trùng nhau", "Cắt nhau", "Không liên quan"], correct: 1 },
+      { q: "Đường tròn (x−2)²+(y+3)²=25 có tâm và bán kính là:", options: ["Tâm (2;−3), R=5", "Tâm (−2;3), R=25", "Tâm (2;3), R=5", "Tâm (2;−3), R=25"], correct: 0 },
+      { q: "(Khó) Đường thẳng vuông góc với 2x+y−1=0 và đi qua (1;1) là:", options: ["x−2y+1=0", "2x+y−3=0", "x+2y−3=0", "2x−y−1=0"], correct: 0 },
+      { q: "Khoảng cách giữa A(1;1), B(4;5) là:", options: ["5", "7", "3", "4"], correct: 0 },
+      { q: "(Khó) Đường tròn qua O(0;0), A(2;0), B(0;2) có tâm là:", options: ["(1;1)", "(0;0)", "(2;2)", "(1;0)"], correct: 0 }
+    ],
+    "Toán::Thống kê": [
+      { q: "Số trung bình của dãy 2,4,6,8 là:", options: ["5", "4", "6", "20"], correct: 0 },
+      { q: "Trung vị của dãy 1,2,3,4,5 là:", options: ["3", "2,5", "4", "15"], correct: 0 },
+      { q: "Mốt là:", options: ["Giá trị xuất hiện nhiều nhất", "Giá trị trung bình", "Giá trị lớn nhất", "Giá trị nhỏ nhất"], correct: 0 },
+      { q: "Khoảng biến thiên của dãy 3,7,2,9,5 là:", options: ["7", "9", "2", "5"], correct: 0 },
+      { q: "Độ lệch chuẩn là:", options: ["Căn bậc hai của phương sai", "Bình phương phương sai", "Trung bình cộng", "Trung vị"], correct: 0 },
+      { q: "(Khó) Phương sai của mẫu 1,3,5 (trung bình=3) là:", options: ["8/3", "4", "2", "8"], correct: 0 },
+      { q: "Tứ phân vị Q2 chính là:", options: ["Trung vị", "Số trung bình", "Mốt", "Khoảng biến thiên"], correct: 0 },
+      { q: "(Khó) Dãy đã sắp xếp 2,4,6,8,10,12. Tìm Q1.", options: ["4", "3", "6", "5"], correct: 0 }
+    ],
+    "Toán::Xác suất": [
+      { q: "Không gian mẫu khi tung 1 đồng xu là:", options: ["{S,N}", "{S}", "{N}", "{S,N,SN}"], correct: 0 },
+      { q: "Xác suất của biến cố chắc chắn là:", options: ["1", "0", "0,5", "Không xác định"], correct: 0 },
+      { q: "Gieo 1 xúc xắc, xác suất ra mặt 5 là:", options: ["1/6", "1/2", "5/6", "1/3"], correct: 0 },
+      { q: "Biến cố đối của A có xác suất là:", options: ["1−P(A)", "P(A)", "1+P(A)", "0"], correct: 0 },
+      { q: "Tung 2 đồng xu, số phần tử không gian mẫu là:", options: ["4", "2", "8", "6"], correct: 0 },
+      { q: "(Khó) Tung 2 xúc xắc, xác suất tổng bằng 8 là:", options: ["5/36", "6/36", "4/36", "1/6"], correct: 0 },
+      { q: "Rút 1 lá từ bộ 52 lá, xác suất được lá Át (A) là:", options: ["1/13", "1/4", "4/13", "1/52"], correct: 0 },
+      { q: "(Khó) Tung xúc xắc 2 lần, xác suất được ít nhất 1 lần mặt 6 là:", options: ["11/36", "1/6", "2/6", "25/36"], correct: 0 }
+    ]
+  };
+
   var modal = document.getElementById("subject-modal");
   var modalBadge = document.getElementById("modal-badge");
   var modalTitle = document.getElementById("modal-title");
@@ -411,14 +516,42 @@
   var lessonCompleteBtn = document.getElementById("lesson-complete-btn");
   var completeToast = document.getElementById("complete-toast");
   var modalProgress = document.getElementById("modal-progress");
+  var lessonQuizBlock = document.getElementById("lesson-quiz-block");
+  var quizQuestions = document.getElementById("quiz-questions");
+  var quizSubmitBtn = document.getElementById("quiz-submit-btn");
+  var quizRetryBtn = document.getElementById("quiz-retry-btn");
+  var quizResult = document.getElementById("quiz-result");
 
   var currentSubject = null;
   var currentSubjectData = null;
   var currentChapter = null;
   var currentChapterRow = null;
+  var currentFlatChapters = []; // [{name, row}] in display order, rebuilt per subject
+  var currentQuizSet = [];
   var toastTimer = null;
+  var PASS_SCORE = 7;
+  var QUIZ_QUESTION_COUNT = 5;
+  var QUIZ_POINTS_PER_Q = 10 / QUIZ_QUESTION_COUNT;
 
-  function chapterMetaLabel(subject, chapterName, hasLesson){
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function isChapterLocked(subject, index){
+    if (index <= 0) return false;
+    var prevName = currentFlatChapters[index - 1] && currentFlatChapters[index - 1].name;
+    if (!prevName) return false;
+    var prevHasQuiz = !!QUIZ_CONTENT[subject + "::" + prevName];
+    return prevHasQuiz && !isChapterDone(subject, prevName);
+  }
+
+  function chapterMetaLabel(subject, chapterName, hasLesson, locked){
+    if (locked) return "🔒 Khóa";
     if (isChapterDone(subject, chapterName)) return "✓ Hoàn thành";
     return hasLesson ? "Xem bài giảng →" : "Chưa học";
   }
@@ -518,14 +651,24 @@
       });
 
       var done = isChapterDone(subject, chapterName);
-      lessonCompleteBtn.disabled = done;
-      lessonCompleteBtn.textContent = done ? "✓ Đã hoàn thành" : "✓ Đánh dấu đã hoàn thành";
+      var hasQuiz = !!QUIZ_CONTENT[subject + "::" + chapterName];
+      if (hasQuiz) {
+        lessonCompleteRow.hidden = true;
+        lessonQuizBlock.hidden = false;
+        renderQuiz(subject, chapterName);
+      } else {
+        lessonQuizBlock.hidden = true;
+        lessonCompleteRow.hidden = false;
+        lessonCompleteBtn.disabled = done;
+        lessonCompleteBtn.textContent = done ? "✓ Đã hoàn thành" : "✓ Đánh dấu đã hoàn thành";
+      }
     } else {
       lessonObjectives.textContent = "";
       lessonRequirementsBlock.hidden = true;
       lessonTheoryBlock.hidden = true;
       lessonExampleBlock.hidden = true;
       lessonPracticeBlock.hidden = true;
+      lessonQuizBlock.hidden = true;
       lessonCompleteRow.hidden = true;
       lessonSoon.hidden = false;
     }
@@ -533,16 +676,33 @@
 
   lessonBack.addEventListener("click", showChapterListView);
 
-  lessonCompleteBtn.addEventListener("click", function(){
-    if (!currentSubject || !currentChapter) return;
-    markChapterDone(currentSubject, currentChapter);
-    lessonCompleteBtn.disabled = true;
-    lessonCompleteBtn.textContent = "✓ Đã hoàn thành";
+  function unlockNextChapterRow(){
+    var idx = -1;
+    for (var i = 0; i < currentFlatChapters.length; i++){
+      if (currentFlatChapters[i].name === currentChapter) { idx = i; break; }
+    }
+    if (idx === -1) return;
+    var next = currentFlatChapters[idx + 1];
+    if (!next || !next.row) return;
+    if (!isChapterLocked(currentSubject, idx + 1)) {
+      next.row.classList.remove("locked");
+      var meta = next.row.querySelector(".chapter-meta");
+      if (meta) {
+        var hasLesson = !!LESSON_CONTENT[currentSubject + "::" + next.name];
+        meta.textContent = chapterMetaLabel(currentSubject, next.name, hasLesson, false);
+        meta.classList.remove("locked-label");
+      }
+    }
+  }
+
+  function celebrateCompletion(){
     if (currentChapterRow) {
       var meta = currentChapterRow.querySelector(".chapter-meta");
-      if (meta) { meta.textContent = "✓ Hoàn thành"; meta.classList.add("done"); }
+      if (meta) { meta.textContent = "✓ Hoàn thành"; meta.classList.add("done"); meta.classList.remove("locked-label"); }
+      currentChapterRow.classList.remove("locked");
     }
     updateModalProgress();
+    unlockNextChapterRow();
 
     completeToast.hidden = false;
     completeToast.classList.add("show");
@@ -551,6 +711,86 @@
       completeToast.classList.remove("show");
       setTimeout(function(){ completeToast.hidden = true; }, 250);
     }, 1800);
+  }
+
+  lessonCompleteBtn.addEventListener("click", function(){
+    if (!currentSubject || !currentChapter) return;
+    markChapterDone(currentSubject, currentChapter);
+    lessonCompleteBtn.disabled = true;
+    lessonCompleteBtn.textContent = "✓ Đã hoàn thành";
+    celebrateCompletion();
+  });
+
+  // ---- Quiz: random 5-question set per attempt, shuffled options ----
+  function renderQuiz(subject, chapterName){
+    var pool = QUIZ_CONTENT[subject + "::" + chapterName] || [];
+    var picked = shuffle(pool).slice(0, QUIZ_QUESTION_COUNT);
+    currentQuizSet = picked.map(function(item){
+      var order = shuffle(item.options.map(function(_, i){ return i; }));
+      return {
+        q: item.q,
+        options: order.map(function(i){ return item.options[i]; }),
+        correct: order.indexOf(item.correct)
+      };
+    });
+
+    quizQuestions.innerHTML = "";
+    currentQuizSet.forEach(function(item, qi){
+      var block = document.createElement("div");
+      block.className = "quiz-question";
+      var optionsHtml = item.options.map(function(opt, oi){
+        return '<label class="quiz-option"><input type="radio" name="quiz-q' + qi + '" value="' + oi + '" />' + opt + '</label>';
+      }).join("");
+      block.innerHTML =
+        '<span class="quiz-question-text">Câu ' + (qi + 1) + '. ' + item.q + '</span>' +
+        '<div class="quiz-options">' + optionsHtml + '</div>';
+      quizQuestions.appendChild(block);
+    });
+
+    quizResult.hidden = true;
+    quizResult.className = "quiz-result";
+    quizSubmitBtn.hidden = false;
+    quizRetryBtn.hidden = true;
+  }
+
+  quizSubmitBtn.addEventListener("click", function(){
+    if (!currentQuizSet.length) return;
+    var correctCount = 0;
+    currentQuizSet.forEach(function(item, qi){
+      var block = quizQuestions.children[qi];
+      var checked = block.querySelector('input[name="quiz-q' + qi + '"]:checked');
+      var options = block.querySelectorAll(".quiz-option");
+      if (checked && Number(checked.value) === item.correct) {
+        correctCount++;
+        block.classList.add("correct");
+      } else {
+        block.classList.add("incorrect");
+        if (checked) options[Number(checked.value)].classList.add("wrong-answer");
+      }
+      options[item.correct].classList.add("right-answer");
+      Array.prototype.forEach.call(block.querySelectorAll("input"), function(inp){ inp.disabled = true; });
+    });
+
+    var score = Math.round(correctCount * QUIZ_POINTS_PER_Q * 10) / 10;
+    var passed = score > PASS_SCORE;
+
+    quizResult.hidden = false;
+    quizResult.className = "quiz-result " + (passed ? "pass" : "fail");
+    quizResult.innerHTML = passed
+      ? "🎉 Đạt " + score + "/10 điểm — đã mở khóa chương tiếp theo!"
+      : "😕 Chỉ đạt " + score + "/10 điểm (cần trên " + PASS_SCORE + " điểm để qua). Xem lại bài giảng rồi làm lại với đề khác nhé.";
+
+    quizSubmitBtn.hidden = true;
+    quizRetryBtn.hidden = passed;
+
+    if (passed) {
+      if (!isChapterDone(currentSubject, currentChapter)) markChapterDone(currentSubject, currentChapter);
+      celebrateCompletion();
+    }
+  });
+
+  quizRetryBtn.addEventListener("click", function(){
+    renderQuiz(currentSubject, currentChapter);
   });
 
   function openSubjectModal(subject, tagLabel, color){
@@ -585,6 +825,7 @@
 
     chapterList.innerHTML = "";
     showChapterListView();
+    currentFlatChapters = [];
 
     gradeKeys.forEach(function(grade){
       var group = document.createElement("div");
@@ -594,17 +835,26 @@
       label.textContent = "Lớp " + grade;
       group.appendChild(label);
       data.grades[grade].forEach(function(ch, i){
+        var index = currentFlatChapters.length;
+        var locked = isChapterLocked(subject, index);
         var row = document.createElement("button");
         row.type = "button";
-        row.className = "chapter-item";
+        row.className = "chapter-item" + (locked ? " locked" : "");
         var hasLesson = !!LESSON_CONTENT[subject + "::" + ch];
-        var metaLabel = chapterMetaLabel(subject, ch, hasLesson);
+        var metaLabel = chapterMetaLabel(subject, ch, hasLesson, locked);
         row.innerHTML =
           '<span class="chapter-num">' + String(i + 1).padStart(2, "0") + '</span>' +
           '<span class="chapter-name">' + ch + '</span>' +
-          '<span class="chapter-meta' + (metaLabel === "✓ Hoàn thành" ? " done" : "") + '">' + metaLabel + '</span>';
-        row.addEventListener("click", function(){ openLesson(subject, ch, row); });
+          '<span class="chapter-meta' + (metaLabel === "✓ Hoàn thành" ? " done" : "") + (locked ? " locked-label" : "") + '">' + metaLabel + '</span>';
+        row.addEventListener("click", function(){
+          if (isChapterLocked(subject, index)) {
+            alert("🔒 Hãy đạt bài kiểm tra của chương trước (trên " + PASS_SCORE + "/10 điểm) để mở khóa chương này.");
+            return;
+          }
+          openLesson(subject, ch, row);
+        });
         group.appendChild(row);
+        currentFlatChapters.push({ name: ch, row: row });
       });
       chapterList.appendChild(group);
     });
