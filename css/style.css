@@ -23,6 +23,11 @@
   --line:#EBDFEA;
   --shadow: 0 18px 40px -20px rgba(107,72,171,0.35);
   --shadow-sm: 0 8px 20px -12px rgba(107,72,171,0.3);
+  --bg-blob-a: rgba(139,107,224,.13);
+  --bg-blob-b: rgba(245,168,192,.13);
+  --bg-blob-c: rgba(121,190,142,.12);
+  --bg-blob-d: rgba(232,172,63,.11);
+  --bg-dot: rgba(58,46,77,.05);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark){
@@ -39,6 +44,11 @@
     --line:#3A3153;
     --shadow: 0 18px 40px -20px rgba(0,0,0,0.55);
     --shadow-sm: 0 8px 20px -12px rgba(0,0,0,0.5);
+    --bg-blob-a: rgba(178,154,255,.11);
+    --bg-blob-b: rgba(240,168,194,.09);
+    --bg-blob-c: rgba(134,209,158,.08);
+    --bg-blob-d: rgba(239,192,103,.08);
+    --bg-dot: rgba(255,255,255,.045);
     color-scheme: dark;
   }
 }
@@ -55,6 +65,11 @@
   --line:#3A3153;
   --shadow: 0 18px 40px -20px rgba(0,0,0,0.55);
   --shadow-sm: 0 8px 20px -12px rgba(0,0,0,0.5);
+  --bg-blob-a: rgba(178,154,255,.11);
+  --bg-blob-b: rgba(240,168,194,.09);
+  --bg-blob-c: rgba(134,209,158,.08);
+  --bg-blob-d: rgba(239,192,103,.08);
+  --bg-dot: rgba(255,255,255,.045);
   color-scheme: dark;
 }
 :root[data-theme="light"]{
@@ -70,17 +85,36 @@
   --line:#EBDFEA;
   --shadow: 0 18px 40px -20px rgba(107,72,171,0.35);
   --shadow-sm: 0 8px 20px -12px rgba(107,72,171,0.3);
+  --bg-blob-a: rgba(139,107,224,.13);
+  --bg-blob-b: rgba(245,168,192,.13);
+  --bg-blob-c: rgba(121,190,142,.12);
+  --bg-blob-d: rgba(232,172,63,.11);
+  --bg-dot: rgba(58,46,77,.05);
   color-scheme: light;
 }
 
 *{box-sizing:border-box;}
 body{
   margin:0;
-  background:var(--bg);
   color:var(--ink);
   font-family:"Segoe UI","Nunito Sans",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   line-height:1.55;
   -webkit-font-smoothing:antialiased;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(circle, var(--bg-dot) 1px, transparent 1.4px),
+    radial-gradient(48% 40% at 10% 6%, var(--bg-blob-a), transparent 62%),
+    radial-gradient(42% 36% at 92% 4%, var(--bg-blob-b), transparent 62%),
+    radial-gradient(46% 40% at 96% 62%, var(--bg-blob-c), transparent 62%),
+    radial-gradient(40% 36% at 4% 78%, var(--bg-blob-d), transparent 62%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+  background-attachment: fixed, scroll, scroll, scroll, scroll;
+}
+@media (max-width:720px){
+  /* fixed backgrounds can jank on mobile browsers during scroll/zoom */
+  body{ background-attachment: scroll, scroll, scroll, scroll, scroll; }
 }
 img,svg{display:block;max-width:100%;}
 a{color:inherit;}
