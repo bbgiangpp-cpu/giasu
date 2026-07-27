@@ -332,6 +332,12 @@ dialog#subject-modal::backdrop{background:rgba(40,26,60,.45);backdrop-filter:blu
 }
 .modal-close:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
 .modal-body{padding:20px 26px 26px;overflow-y:auto;max-height:calc(min(680px,86vh) - 90px - 78px);}
+.exam-format{
+  background:var(--modal-accent-tint, var(--accent-tint));border:1px solid var(--line);
+  border-radius:14px;padding:14px 16px;margin-bottom:16px;
+}
+.exam-format-label{display:block;font-size:12px;font-weight:800;letter-spacing:.03em;color:var(--modal-accent, var(--accent-strong));margin-bottom:6px;}
+.exam-format p{font-size:13.5px;color:var(--ink);line-height:1.55;}
 .modal-body p.modal-note{color:var(--ink-soft);font-size:13.5px;margin-bottom:16px;}
 .chapter-list{display:flex;flex-direction:column;gap:22px;}
 .grade-group{display:flex;flex-direction:column;gap:10px;}
