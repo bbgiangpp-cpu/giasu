@@ -197,35 +197,19 @@ header.nav{
 .link-ghost{font-weight:700;font-size:14.5px;color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
 .link-ghost:hover{color:var(--accent-strong);}
 
-.hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
-.float-chip{
-  background:var(--surface);border-radius:999px;box-shadow:var(--shadow-sm);
-  padding:8px 14px;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
-  border:1px solid var(--line);color:var(--accent-strong);
-  animation:float-chip-bob 4.5s ease-in-out infinite;
-}
-.float-chip:nth-child(2){color:var(--sage);animation-delay:1.4s;}
-.dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none;}
-
 /* on wide screens, the photo has empty room on the right — dock the copy there
-   over a translucent panel, since the photo's own background stays light in both themes */
+   directly on the photo, since its background stays light cream in both themes */
 @media (min-width:820px){
   .hero-copy{
-    position:absolute;top:50%;left:50%;right:4%;transform:translateY(-50%);
-    z-index:2;padding:24px 26px;border-radius:22px;
-    background:rgba(255,255,255,.62);backdrop-filter:blur(10px);
-    color:#3A2E4D;
+    position:absolute;top:9%;left:55%;right:4%;
+    z-index:2;color:#3A2E4D;
   }
   .hero-copy h1{color:#3A2E4D;}
   .hero-copy h1 .accent{color:#6C48D6;}
-  .hero-copy .lede{color:#5F5270;}
+  .hero-copy .lede{color:#5F5270;max-width:none;}
   .hero-copy .link-ghost{color:#6B5B7A;}
 }
 
-@keyframes float-chip-bob{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-7px);}
-}
 .blob{animation:blob-drift 9s ease-in-out infinite;}
 .blob-2{animation-delay:2.2s;}
 @keyframes blob-drift{
@@ -233,7 +217,7 @@ header.nav{
   50%{transform:translate(-3%,3%) scale(1.06);}
 }
 @media(prefers-reduced-motion:reduce){
-  .float-chip,.blob{animation:none;}
+  .blob{animation:none;}
 }
 
 /* ---------- Reform notice ---------- */
