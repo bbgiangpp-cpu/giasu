@@ -211,8 +211,8 @@ header.nav{
    over a translucent panel, since the photo's own background stays light in both themes */
 @media (min-width:820px){
   .hero-copy{
-    position:absolute;top:50%;left:38%;transform:translateY(-50%);
-    width:40%;z-index:2;padding:26px 28px;border-radius:22px;
+    position:absolute;top:50%;left:50%;right:4%;transform:translateY(-50%);
+    z-index:2;padding:24px 26px;border-radius:22px;
     background:rgba(255,255,255,.62);backdrop-filter:blur(10px);
     color:#3A2E4D;
   }
