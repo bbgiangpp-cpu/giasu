@@ -201,8 +201,9 @@ header.nav{
    directly on the photo, since its background stays light cream in both themes */
 @media (min-width:820px){
   .hero-copy{
-    position:absolute;top:4%;left:55%;right:4%;
-    z-index:2;color:#3A2E4D;
+    position:absolute;top:0;bottom:0;left:55%;right:4%;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:0;z-index:2;color:#3A2E4D;
   }
   .hero-copy h1{color:#3A2E4D;}
   .hero-copy h1 .accent{color:#6C48D6;}
