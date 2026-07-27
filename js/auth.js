@@ -7,17 +7,45 @@ import {
   onAuthStateChanged,
   updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const storage = getStorage(app);
+
+// ---- Avatar stored locally in this browser (no backend storage set up yet) ----
+// Keyed by uid so it doesn't leak between accounts sharing a device.
+function localAvatarKey(uid) { return "avatar_" + uid; }
+function getLocalAvatar(uid) {
+  try { return localStorage.getItem(localAvatarKey(uid)); } catch (e) { return null; }
+}
+function setLocalAvatar(uid, dataUrl) {
+  try { localStorage.setItem(localAvatarKey(uid), dataUrl); return true; } catch (e) { return false; }
+}
+
+// Downscale + compress the chosen image client-side so it stays well under
+// localStorage's per-origin quota regardless of the original file size.
+function resizeImageToDataURL(file, maxSize, quality) {
+  return new Promise(function (resolve, reject) {
+    var img = new Image();
+    var objectUrl = URL.createObjectURL(file);
+    img.onload = function () {
+      var scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      var w = Math.round(img.width * scale);
+      var h = Math.round(img.height * scale);
+      var canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(objectUrl);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("Không đọc được ảnh."));
+    };
+    img.src = objectUrl;
+  });
+}
 
 const ERROR_MESSAGES = {
   "auth/email-already-in-use": "Email này đã được đăng ký. Hãy đăng nhập thay vì đăng ký lại.",
@@ -175,7 +203,7 @@ const avatarInput = document.getElementById("avatar-input");
 const avatarPreview = document.getElementById("avatar-preview");
 const avatarFallback = document.getElementById("avatar-preview-fallback");
 
-var pendingAvatarFile = null;
+var pendingAvatarDataUrl = null;
 
 closeOnBackdrop(profileModal);
 profileModalClose.addEventListener("click", function () { profileModal.close(); });
@@ -201,15 +229,20 @@ avatarInput.addEventListener("change", function () {
     avatarInput.value = "";
     return;
   }
-  if (file.size > 3 * 1024 * 1024) {
-    profileError.textContent = "Ảnh quá lớn, vui lòng chọn ảnh dưới 3MB.";
+  if (file.size > 5 * 1024 * 1024) {
+    profileError.textContent = "Ảnh quá lớn, vui lòng chọn ảnh dưới 5MB.";
     avatarInput.value = "";
     return;
   }
-  pendingAvatarFile = file;
-  var reader = new FileReader();
-  reader.onload = function () { showAvatarPreview(reader.result); };
-  reader.readAsDataURL(file);
+  resizeImageToDataURL(file, 240, 0.85)
+    .then(function (dataUrl) {
+      pendingAvatarDataUrl = dataUrl;
+      showAvatarPreview(dataUrl);
+    })
+    .catch(function () {
+      profileError.textContent = "Không đọc được ảnh này, thử ảnh khác nhé.";
+      avatarInput.value = "";
+    });
 });
 
 function openProfileModal() {
@@ -217,12 +250,12 @@ function openProfileModal() {
   if (!user) return;
   profileError.textContent = "";
   profileSuccess.textContent = "";
-  pendingAvatarFile = null;
+  pendingAvatarDataUrl = null;
   avatarInput.value = "";
   profileForm.name.value = user.displayName || "";
   profileForm.email.value = user.email || "";
   var initial = (user.displayName || user.email || "?").trim().charAt(0).toUpperCase();
-  showAvatarPreview(user.photoURL || null, initial);
+  showAvatarPreview(getLocalAvatar(user.uid) || user.photoURL || null, initial);
   profileModal.showModal();
 }
 
@@ -235,19 +268,21 @@ profileForm.addEventListener("submit", function (e) {
   profileSaveBtn.disabled = true;
   profileSaveBtn.textContent = "Đang lưu...";
 
-  var uploadStep = pendingAvatarFile
-    ? uploadBytes(ref(storage, "avatars/" + auth.currentUser.uid), pendingAvatarFile).then(function (snap) {
-        return getDownloadURL(snap.ref);
-      })
-    : Promise.resolve(auth.currentUser.photoURL || null);
+  var saved = true;
+  if (pendingAvatarDataUrl) {
+    saved = setLocalAvatar(auth.currentUser.uid, pendingAvatarDataUrl);
+  }
 
-  uploadStep
-    .then(function (photoURL) {
-      return updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL });
-    })
+  updateProfile(auth.currentUser, { displayName: name })
     .then(function () {
-      profileSuccess.textContent = "Đã lưu thay đổi.";
-      pendingAvatarFile = null;
+      if (!saved) {
+        profileError.textContent = "Đã lưu tên, nhưng trình duyệt từ chối lưu ảnh (bộ nhớ tạm đầy). Thử ảnh nhỏ hơn nhé.";
+      } else {
+        profileSuccess.textContent = pendingAvatarDataUrl
+          ? "Đã lưu thay đổi. Ảnh đang lưu trên trình duyệt này, chưa đồng bộ sang máy khác."
+          : "Đã lưu thay đổi.";
+      }
+      pendingAvatarDataUrl = null;
       renderAuthArea(auth.currentUser);
     })
     .catch(function (err) {
@@ -281,11 +316,12 @@ function renderAuthArea(user) {
     trigger.setAttribute("aria-expanded", "false");
 
     var initial = (user.displayName || user.email || "?").trim().charAt(0).toUpperCase();
+    var avatarSrc = getLocalAvatar(user.uid) || user.photoURL;
     var avatar = document.createElement("span");
     avatar.className = "user-avatar";
-    if (user.photoURL) {
+    if (avatarSrc) {
       var img = document.createElement("img");
-      img.src = user.photoURL;
+      img.src = avatarSrc;
       img.alt = "";
       avatar.appendChild(img);
     } else {
