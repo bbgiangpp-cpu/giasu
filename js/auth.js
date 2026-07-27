@@ -7,10 +7,17 @@ import {
   onAuthStateChanged,
   updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 const ERROR_MESSAGES = {
   "auth/email-already-in-use": "Email này đã được đăng ký. Hãy đăng nhập thay vì đăng ký lại.",
@@ -26,71 +33,111 @@ function friendlyError(err) {
   return ERROR_MESSAGES[err.code] || "Có lỗi xảy ra, vui lòng thử lại.";
 }
 
-const authModal = document.getElementById("auth-modal");
+// ---- Simple self-built captcha (no external service) ----
+function makeCaptcha(questionEl, inputEl, refreshBtn) {
+  var answer = 0;
+  function generate() {
+    var a = Math.floor(Math.random() * 9) + 1;
+    var b = Math.floor(Math.random() * 9) + 1;
+    answer = a + b;
+    questionEl.textContent = a + " + " + b + " = ?";
+    inputEl.value = "";
+  }
+  refreshBtn.addEventListener("click", generate);
+  generate();
+  return {
+    check: function () { return Number(inputEl.value) === answer; },
+    reset: generate
+  };
+}
+
+const loginCaptcha = makeCaptcha(
+  document.getElementById("login-captcha-q"),
+  document.getElementById("login-captcha-input"),
+  document.getElementById("login-captcha-refresh")
+);
+const registerCaptcha = makeCaptcha(
+  document.getElementById("register-captcha-q"),
+  document.getElementById("register-captcha-input"),
+  document.getElementById("register-captcha-refresh")
+);
+
+// ---- Login / Register modals ----
+const loginModal = document.getElementById("login-modal");
+const registerModal = document.getElementById("register-modal");
 const authArea = document.getElementById("auth-area");
-const authModalClose = document.getElementById("auth-modal-close");
-const tabs = document.querySelectorAll(".auth-tab");
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
 const loginError = document.getElementById("login-error");
 const registerError = document.getElementById("register-error");
 
-function switchTab(name) {
-  tabs.forEach(function (t) {
-    t.classList.toggle("active", t.dataset.tab === name);
+function closeOnBackdrop(dialogEl) {
+  dialogEl.addEventListener("click", function (e) {
+    var box = dialogEl.getBoundingClientRect();
+    var inside = e.clientX >= box.left && e.clientX <= box.right && e.clientY >= box.top && e.clientY <= box.bottom;
+    if (!inside) dialogEl.close();
   });
-  loginForm.hidden = name !== "login";
-  registerForm.hidden = name !== "register";
+}
+closeOnBackdrop(loginModal);
+closeOnBackdrop(registerModal);
+
+document.getElementById("login-modal-close").addEventListener("click", function () { loginModal.close(); });
+document.getElementById("register-modal-close").addEventListener("click", function () { registerModal.close(); });
+
+function openLogin() {
+  registerModal.close();
   loginError.textContent = "";
+  loginCaptcha.reset();
+  loginModal.showModal();
+}
+function openRegister() {
+  loginModal.close();
   registerError.textContent = "";
+  registerCaptcha.reset();
+  registerModal.showModal();
 }
 
-function openAuth(tabName) {
-  switchTab(tabName);
-  authModal.showModal();
-}
+document.getElementById("to-register").addEventListener("click", openRegister);
+document.getElementById("to-login").addEventListener("click", openLogin);
 
 function wireOpenButtons() {
   var loginBtn = document.getElementById("open-login");
   var registerBtn = document.getElementById("open-register");
-  if (loginBtn) loginBtn.addEventListener("click", function () { openAuth("login"); });
-  if (registerBtn) registerBtn.addEventListener("click", function () { openAuth("register"); });
+  if (loginBtn) loginBtn.addEventListener("click", openLogin);
+  if (registerBtn) registerBtn.addEventListener("click", openRegister);
 }
 wireOpenButtons();
-
-tabs.forEach(function (tab) {
-  tab.addEventListener("click", function () {
-    switchTab(tab.dataset.tab);
-  });
-});
-
-authModalClose.addEventListener("click", function () {
-  authModal.close();
-});
-authModal.addEventListener("click", function (e) {
-  var box = authModal.getBoundingClientRect();
-  var inside = e.clientX >= box.left && e.clientX <= box.right && e.clientY >= box.top && e.clientY <= box.bottom;
-  if (!inside) authModal.close();
-});
 
 loginForm.addEventListener("submit", function (e) {
   e.preventDefault();
   loginError.textContent = "";
+  if (!loginCaptcha.check()) {
+    loginError.textContent = "Kết quả xác nhận chưa đúng, thử lại nhé.";
+    loginCaptcha.reset();
+    return;
+  }
   var email = loginForm.email.value.trim();
   var password = loginForm.password.value;
   signInWithEmailAndPassword(auth, email, password)
     .then(function () {
-      authModal.close();
+      loginModal.close();
       loginForm.reset();
+      loginCaptcha.reset();
     })
     .catch(function (err) {
       loginError.textContent = friendlyError(err);
+      loginCaptcha.reset();
     });
 });
 
 registerForm.addEventListener("submit", function (e) {
   e.preventDefault();
   registerError.textContent = "";
+  if (!registerCaptcha.check()) {
+    registerError.textContent = "Kết quả xác nhận chưa đúng, thử lại nhé.";
+    registerCaptcha.reset();
+    return;
+  }
   var name = registerForm.name.value.trim();
   var email = registerForm.email.value.trim();
   var password = registerForm.password.value;
@@ -98,6 +145,7 @@ registerForm.addEventListener("submit", function (e) {
 
   if (password !== confirm) {
     registerError.textContent = "Mật khẩu nhập lại không khớp.";
+    registerCaptcha.reset();
     return;
   }
 
@@ -106,26 +154,62 @@ registerForm.addEventListener("submit", function (e) {
       return updateProfile(cred.user, { displayName: name });
     })
     .then(function () {
-      authModal.close();
+      registerModal.close();
       registerForm.reset();
+      registerCaptcha.reset();
     })
     .catch(function (err) {
       registerError.textContent = friendlyError(err);
+      registerCaptcha.reset();
     });
 });
 
-// ---- Profile modal ----
+// ---- Profile modal (name + avatar) ----
 const profileModal = document.getElementById("profile-modal");
 const profileModalClose = document.getElementById("profile-modal-close");
 const profileForm = document.getElementById("profile-form");
 const profileError = document.getElementById("profile-error");
 const profileSuccess = document.getElementById("profile-success");
+const profileSaveBtn = document.getElementById("profile-save-btn");
+const avatarInput = document.getElementById("avatar-input");
+const avatarPreview = document.getElementById("avatar-preview");
+const avatarFallback = document.getElementById("avatar-preview-fallback");
 
+var pendingAvatarFile = null;
+
+closeOnBackdrop(profileModal);
 profileModalClose.addEventListener("click", function () { profileModal.close(); });
-profileModal.addEventListener("click", function (e) {
-  var box = profileModal.getBoundingClientRect();
-  var inside = e.clientX >= box.left && e.clientX <= box.right && e.clientY >= box.top && e.clientY <= box.bottom;
-  if (!inside) profileModal.close();
+
+function showAvatarPreview(src, fallbackLetter) {
+  if (src) {
+    avatarPreview.src = src;
+    avatarPreview.hidden = false;
+    avatarFallback.hidden = true;
+  } else {
+    avatarPreview.hidden = true;
+    avatarFallback.hidden = false;
+    avatarFallback.textContent = fallbackLetter || "?";
+  }
+}
+
+avatarInput.addEventListener("change", function () {
+  var file = avatarInput.files[0];
+  profileError.textContent = "";
+  if (!file) return;
+  if (!file.type.startsWith("image/")) {
+    profileError.textContent = "Vui lòng chọn một file ảnh (JPG, PNG...).";
+    avatarInput.value = "";
+    return;
+  }
+  if (file.size > 3 * 1024 * 1024) {
+    profileError.textContent = "Ảnh quá lớn, vui lòng chọn ảnh dưới 3MB.";
+    avatarInput.value = "";
+    return;
+  }
+  pendingAvatarFile = file;
+  var reader = new FileReader();
+  reader.onload = function () { showAvatarPreview(reader.result); };
+  reader.readAsDataURL(file);
 });
 
 function openProfileModal() {
@@ -133,8 +217,12 @@ function openProfileModal() {
   if (!user) return;
   profileError.textContent = "";
   profileSuccess.textContent = "";
+  pendingAvatarFile = null;
+  avatarInput.value = "";
   profileForm.name.value = user.displayName || "";
   profileForm.email.value = user.email || "";
+  var initial = (user.displayName || user.email || "?").trim().charAt(0).toUpperCase();
+  showAvatarPreview(user.photoURL || null, initial);
   profileModal.showModal();
 }
 
@@ -143,13 +231,31 @@ profileForm.addEventListener("submit", function (e) {
   profileError.textContent = "";
   profileSuccess.textContent = "";
   var name = profileForm.name.value.trim();
-  updateProfile(auth.currentUser, { displayName: name })
+
+  profileSaveBtn.disabled = true;
+  profileSaveBtn.textContent = "Đang lưu...";
+
+  var uploadStep = pendingAvatarFile
+    ? uploadBytes(ref(storage, "avatars/" + auth.currentUser.uid), pendingAvatarFile).then(function (snap) {
+        return getDownloadURL(snap.ref);
+      })
+    : Promise.resolve(auth.currentUser.photoURL || null);
+
+  uploadStep
+    .then(function (photoURL) {
+      return updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL });
+    })
     .then(function () {
       profileSuccess.textContent = "Đã lưu thay đổi.";
+      pendingAvatarFile = null;
       renderAuthArea(auth.currentUser);
     })
     .catch(function (err) {
       profileError.textContent = friendlyError(err);
+    })
+    .finally(function () {
+      profileSaveBtn.disabled = false;
+      profileSaveBtn.textContent = "Lưu thay đổi";
     });
 });
 
@@ -177,7 +283,14 @@ function renderAuthArea(user) {
     var initial = (user.displayName || user.email || "?").trim().charAt(0).toUpperCase();
     var avatar = document.createElement("span");
     avatar.className = "user-avatar";
-    avatar.textContent = initial;
+    if (user.photoURL) {
+      var img = document.createElement("img");
+      img.src = user.photoURL;
+      img.alt = "";
+      avatar.appendChild(img);
+    } else {
+      avatar.textContent = initial;
+    }
     var statusDot = document.createElement("span");
     statusDot.className = "user-status-dot";
     statusDot.title = "Đang đăng nhập";

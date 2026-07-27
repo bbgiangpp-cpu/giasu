@@ -246,21 +246,16 @@
   </div>
 </dialog>
 
-<dialog id="auth-modal">
+<dialog id="login-modal">
   <div class="modal-head">
-    <span class="modal-badge" id="auth-modal-badge">🔐</span>
+    <span class="modal-badge" id="login-modal-badge">🔐</span>
     <div>
-      <h4>Tài khoản của bạn</h4>
+      <h4>Đăng nhập</h4>
       <span>Đồng bộ tiến độ học tập trên mọi thiết bị</span>
     </div>
-    <button type="button" class="modal-close" id="auth-modal-close" aria-label="Đóng">✕</button>
+    <button type="button" class="modal-close" id="login-modal-close" aria-label="Đóng">✕</button>
   </div>
   <div class="modal-body">
-    <div class="auth-tabs">
-      <button type="button" class="auth-tab active" data-tab="login">Đăng nhập</button>
-      <button type="button" class="auth-tab" data-tab="register">Đăng ký</button>
-    </div>
-
     <form id="login-form" class="auth-form">
       <label>Email
         <input type="email" name="email" required placeholder="ban@email.com" />
@@ -268,11 +263,31 @@
       <label>Mật khẩu
         <input type="password" name="password" required minlength="6" placeholder="Tối thiểu 6 ký tự" />
       </label>
+      <label>Xác nhận bạn không phải robot
+        <div class="captcha-box">
+          <span class="captcha-question" id="login-captcha-q">? + ? = ?</span>
+          <input type="number" id="login-captcha-input" required placeholder="Kết quả" />
+          <button type="button" class="captcha-refresh" id="login-captcha-refresh" title="Đổi câu hỏi khác">⟳</button>
+        </div>
+      </label>
       <p class="auth-error" id="login-error"></p>
       <button type="submit" class="btn btn-primary">Đăng nhập →</button>
+      <p class="auth-switch">Chưa có tài khoản? <button type="button" id="to-register">Đăng ký ngay</button></p>
     </form>
+  </div>
+</dialog>
 
-    <form id="register-form" class="auth-form" hidden>
+<dialog id="register-modal">
+  <div class="modal-head">
+    <span class="modal-badge" id="register-modal-badge">📝</span>
+    <div>
+      <h4>Đăng ký</h4>
+      <span>Tạo tài khoản để lưu tiến độ học tập</span>
+    </div>
+    <button type="button" class="modal-close" id="register-modal-close" aria-label="Đóng">✕</button>
+  </div>
+  <div class="modal-body">
+    <form id="register-form" class="auth-form">
       <label>Họ và tên
         <input type="text" name="name" required placeholder="Nguyễn Văn A" />
       </label>
@@ -285,8 +300,16 @@
       <label>Nhập lại mật khẩu
         <input type="password" name="confirm" required minlength="6" placeholder="Nhập lại mật khẩu" />
       </label>
+      <label>Xác nhận bạn không phải robot
+        <div class="captcha-box">
+          <span class="captcha-question" id="register-captcha-q">? + ? = ?</span>
+          <input type="number" id="register-captcha-input" required placeholder="Kết quả" />
+          <button type="button" class="captcha-refresh" id="register-captcha-refresh" title="Đổi câu hỏi khác">⟳</button>
+        </div>
+      </label>
       <p class="auth-error" id="register-error"></p>
       <button type="submit" class="btn btn-primary">Tạo tài khoản →</button>
+      <p class="auth-switch">Đã có tài khoản? <button type="button" id="to-login">Đăng nhập</button></p>
     </form>
   </div>
 </dialog>
@@ -302,6 +325,17 @@
   </div>
   <div class="modal-body">
     <form id="profile-form" class="auth-form">
+      <div class="avatar-picker">
+        <div class="avatar-preview-wrap">
+          <img id="avatar-preview" class="avatar-preview" alt="Ảnh đại diện" hidden />
+          <span id="avatar-preview-fallback" class="avatar-preview-fallback">?</span>
+        </div>
+        <label class="btn btn-ghost btn-sm avatar-choose-btn">
+          Chọn ảnh từ máy
+          <input type="file" id="avatar-input" accept="image/*" hidden />
+        </label>
+        <span class="avatar-hint">JPG/PNG, tối đa 3MB</span>
+      </div>
       <label>Họ và tên
         <input type="text" name="name" required placeholder="Nguyễn Văn A" />
       </label>
@@ -310,7 +344,7 @@
       </label>
       <p class="auth-error" id="profile-error"></p>
       <p class="auth-success" id="profile-success"></p>
-      <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+      <button type="submit" class="btn btn-primary" id="profile-save-btn">Lưu thay đổi</button>
     </form>
   </div>
 </dialog>
