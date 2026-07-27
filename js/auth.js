@@ -28,7 +28,6 @@ function friendlyError(err) {
 
 const authModal = document.getElementById("auth-modal");
 const authArea = document.getElementById("auth-area");
-const openLoginBtn = document.getElementById("open-login");
 const authModalClose = document.getElementById("auth-modal-close");
 const tabs = document.querySelectorAll(".auth-tab");
 const loginForm = document.getElementById("login-form");
@@ -46,18 +45,24 @@ function switchTab(name) {
   registerError.textContent = "";
 }
 
+function openAuth(tabName) {
+  switchTab(tabName);
+  authModal.showModal();
+}
+
+function wireOpenButtons() {
+  var loginBtn = document.getElementById("open-login");
+  var registerBtn = document.getElementById("open-register");
+  if (loginBtn) loginBtn.addEventListener("click", function () { openAuth("login"); });
+  if (registerBtn) registerBtn.addEventListener("click", function () { openAuth("register"); });
+}
+wireOpenButtons();
+
 tabs.forEach(function (tab) {
   tab.addEventListener("click", function () {
     switchTab(tab.dataset.tab);
   });
 });
-
-if (openLoginBtn) {
-  openLoginBtn.addEventListener("click", function () {
-    switchTab("login");
-    authModal.showModal();
-  });
-}
 
 authModalClose.addEventListener("click", function () {
   authModal.close();
@@ -124,16 +129,10 @@ function renderAuthArea(user) {
       signOut(auth);
     });
   } else {
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "btn btn-ghost btn-sm";
-    btn.id = "open-login";
-    btn.textContent = "Đăng nhập";
-    btn.addEventListener("click", function () {
-      switchTab("login");
-      authModal.showModal();
-    });
-    authArea.appendChild(btn);
+    authArea.innerHTML =
+      '<button type="button" class="auth-text-link" id="open-register">Đăng ký</button>' +
+      '<button type="button" class="btn btn-ghost btn-sm" id="open-login">Đăng nhập</button>';
+    wireOpenButtons();
   }
 }
 
