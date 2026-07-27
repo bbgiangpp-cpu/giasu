@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gia Sư Online — Ôn thi theo đúng cấu trúc THPT 2025</title>
   <meta name="description" content="Nền tảng gia sư online 1-kèm-1: chọn môn bắt buộc và tự chọn theo đúng cấu trúc kỳ thi THPT 2025, theo dõi tiến độ học tập theo từng môn." />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
 </head>
 <body>
 
@@ -364,30 +364,54 @@
   <div class="chat-panel" id="chat-panel">
     <div class="chat-panel-head">
       <div>
-        <h4>💬 Chat cộng đồng</h4>
+        <h4>💬 Chat &amp; Hỏi AI</h4>
         <span><span class="chat-online-dot"></span> <span id="chat-online-count">0</span> đang online</span>
       </div>
       <button type="button" class="modal-close" id="chat-close" aria-label="Đóng chat">✕</button>
     </div>
 
-    <ul class="chat-online-list" id="chat-online-list"></ul>
-
-    <div class="chat-messages" id="chat-messages"></div>
-
-    <div class="chat-guest-notice" id="chat-guest-notice">
-      <p>Đăng nhập để tham gia trò chuyện với các thành viên đang online.</p>
-      <button type="button" class="btn btn-primary btn-sm" id="chat-login-btn">Đăng nhập →</button>
+    <div class="chat-tabs">
+      <button type="button" class="chat-tab active" data-tab="community">💬 Cộng đồng</button>
+      <button type="button" class="chat-tab" data-tab="ai">🤖 Hỏi AI</button>
     </div>
 
-    <form id="chat-form" class="chat-form" hidden>
-      <input type="text" id="chat-input" maxlength="500" placeholder="Nhập tin nhắn..." autocomplete="off" required />
-      <button type="submit" class="chat-send" aria-label="Gửi">➤</button>
-    </form>
+    <div class="chat-tab-panel" id="tab-community">
+      <ul class="chat-online-list" id="chat-online-list"></ul>
+
+      <div class="chat-messages" id="chat-messages"></div>
+
+      <div class="chat-guest-notice" id="chat-guest-notice">
+        <p>Đăng nhập để tham gia trò chuyện với các thành viên đang online.</p>
+        <button type="button" class="btn btn-primary btn-sm" id="chat-login-btn">Đăng nhập →</button>
+      </div>
+
+      <form id="chat-form" class="chat-form" hidden>
+        <input type="text" id="chat-input" maxlength="500" placeholder="Nhập tin nhắn..." autocomplete="off" required />
+        <button type="submit" class="chat-send" aria-label="Gửi">➤</button>
+      </form>
+    </div>
+
+    <div class="chat-tab-panel" id="tab-ai" hidden>
+      <div class="ai-answer" id="ai-answer">
+        <p class="ai-placeholder">Đặt câu hỏi về bài học, mình sẽ trả lời ngay — ví dụ "Đạo hàm của sin(x) là gì?".</p>
+      </div>
+
+      <div class="chat-guest-notice" id="ai-guest-notice">
+        <p>Đăng nhập để sử dụng trợ lý AI.</p>
+        <button type="button" class="btn btn-primary btn-sm" id="ai-login-btn">Đăng nhập →</button>
+      </div>
+
+      <form id="ai-form" class="chat-form" hidden>
+        <input type="text" id="ai-input" maxlength="500" placeholder="Nhập câu hỏi..." autocomplete="off" required />
+        <button type="submit" class="chat-send" id="ai-send" aria-label="Hỏi">➤</button>
+      </form>
+    </div>
   </div>
 </div>
 
-<script src="js/main.js?v=8"></script>
-<script type="module" src="js/auth.js?v=8"></script>
-<script type="module" src="js/chat.js?v=8"></script>
+<script src="js/main.js?v=9"></script>
+<script type="module" src="js/auth.js?v=9"></script>
+<script type="module" src="js/chat.js?v=9"></script>
+<script type="module" src="js/ai-assistant.js?v=9"></script>
 </body>
 </html>
