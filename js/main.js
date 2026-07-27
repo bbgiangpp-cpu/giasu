@@ -231,7 +231,6 @@
   var examFormatText = document.getElementById("exam-format-text");
   var examDetailBox = document.getElementById("exam-detail");
   var modalClose = document.getElementById("modal-close");
-  var modalCta = document.getElementById("modal-cta");
   var modalNote = document.getElementById("modal-note");
   var examFormatBox = document.getElementById("exam-format");
   var lessonView = document.getElementById("lesson-view");
@@ -405,11 +404,6 @@
     });
 
     updateModalProgress();
-
-    modalCta.onclick = function(){
-      alert("Đã ghi nhận nhu cầu học " + subject + " (" + tagLabel + "). Đội ngũ sẽ liên hệ để xếp lịch học thử miễn phí.");
-      modal.close();
-    };
     modal.showModal();
   }
 
