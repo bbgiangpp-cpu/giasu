@@ -25,27 +25,27 @@
     }},
     "Vật Lý": {short:"Lý", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn — tăng câu hỏi gắn với thí nghiệm, tình huống thực tế.", duration:"50 phút", parts:["Phần I – Nhiều lựa chọn: 18 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 6 câu"], grades:{
       "10":["Mở đầu Vật lý","Động học","Động lực học","Công – Năng lượng – Công suất","Động lượng","Chuyển động tròn","Biến dạng của vật rắn"],
-      "11":["Dao động","Sóng","Điện trường"],
-      "12":["Vật lý nhiệt","Khí lý tưởng","Từ trường","Vật lý hạt nhân và phóng xạ"]
+      "11":["Dao động","Sóng","Trường điện (Điện trường)","Dòng điện, mạch điện"],
+      "12":["Vật lý nhiệt","Khí lý tưởng","Trường từ (Từ trường)","Dòng điện xoay chiều"]
     }},
     "Hóa Học": {short:"Hóa", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn — chú trọng câu hỏi ứng dụng thực tiễn, thí nghiệm.", duration:"50 phút", parts:["Phần I – Nhiều lựa chọn: 18 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 6 câu"], grades:{
       "10":["Cấu tạo nguyên tử","Bảng tuần hoàn các nguyên tố hóa học","Liên kết hóa học","Phản ứng oxi hóa – khử","Năng lượng hóa học","Tốc độ phản ứng hóa học","Nguyên tố nhóm VIIA (Halogen)"],
-      "11":["Cân bằng hóa học","Nitrogen – Sulfur","Đại cương hóa học hữu cơ","Hydrocarbon","Dẫn xuất halogen – Alcohol – Phenol","Hợp chất carbonyl – Carboxylic acid"],
-      "12":["Ester – Lipid","Carbohydrate","Hợp chất chứa nitrogen (Amine – Amino acid – Protein)","Polymer","Đại cương về kim loại","Kim loại nhóm IA – IIA","Nguyên tố nhóm VIIIB (Iron)"]
+      "11":["Cân bằng hóa học","Pin điện và điện phân","Nitrogen – Sulfur","Đại cương về kim loại","Đại cương hóa học hữu cơ","Hydrocarbon","Dẫn xuất halogen – Alcohol – Phenol","Hợp chất carbonyl – Carboxylic acid"],
+      "12":["Ester – Lipid","Carbohydrate","Hợp chất chứa nitrogen (Amine – Amino acid – Protein)","Polymer","Nguyên tố nhóm IA – IIA","Dãy kim loại chuyển tiếp thứ nhất và phức chất"]
     }},
     "Sinh Học": {short:"Sinh", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn — tăng câu hỏi liên hệ thực tiễn, sức khỏe, môi trường.", duration:"50 phút", parts:["Phần I – Nhiều lựa chọn: 18 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 6 câu"], grades:{
-      "10":["Thành phần hóa học của tế bào","Cấu trúc tế bào","Trao đổi chất và chuyển hóa năng lượng ở tế bào","Chu kỳ tế bào và phân bào","Vi sinh vật và ứng dụng"],
+      "10":["Giới thiệu chương trình Sinh học & các cấp độ tổ chức của thế giới sống","Thành phần hóa học của tế bào","Cấu trúc tế bào","Trao đổi chất và chuyển hóa năng lượng ở tế bào","Chu kỳ tế bào và phân bào","Vi sinh vật và virus"],
       "11":["Trao đổi chất và chuyển hóa năng lượng ở sinh vật","Cảm ứng ở sinh vật","Sinh trưởng và phát triển ở sinh vật","Sinh sản ở sinh vật"],
       "12":["Di truyền học phân tử (Gene – DNA – RNA)","Di truyền học nhiễm sắc thể","Di truyền học quần thể","Ứng dụng di truyền học","Di truyền học người","Tiến hóa","Sinh thái học và môi trường"]
     }},
     "Lịch Sử": {short:"Sử", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn — khai thác tư liệu, hình ảnh, bản đồ lịch sử.", duration:"50 phút", parts:["Phần I – Nhiều lựa chọn: 18 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 4 câu"], grades:{
-      "10":["Hiện thực lịch sử và nhận thức lịch sử","Văn minh Đông Nam Á","Các cuộc cách mạng công nghiệp","Cộng đồng các dân tộc Việt Nam"],
+      "10":["Lịch sử và Sử học – vai trò của Sử học","Một số nền văn minh thế giới thời cổ – trung đại","Các cuộc cách mạng công nghiệp trong lịch sử thế giới","Văn minh Đông Nam Á cổ – trung đại","Văn minh Đại Việt","Cộng đồng các dân tộc Việt Nam"],
       "11":["Cách mạng tư sản và sự phát triển CNTB","Chủ nghĩa xã hội từ 1917 đến nay","Quá trình giành độc lập của các quốc gia Đông Nam Á","Chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam","Công cuộc cải cách trong lịch sử Việt Nam"],
-      "12":["Thế giới trong và sau Chiến tranh lạnh","Trật tự thế giới mới và vai trò của ASEAN","Cách mạng tháng Tám năm 1945","Kháng chiến chống Pháp và chống Mỹ (1945–1975)","Công cuộc Đổi mới ở Việt Nam từ 1986","Lịch sử đối ngoại Việt Nam","Hồ Chí Minh trong lịch sử Việt Nam"]
+      "12":["Thế giới trong và sau Chiến tranh lạnh","ASEAN – Những chặng đường lịch sử","Cách mạng tháng Tám, chiến tranh giải phóng dân tộc và bảo vệ Tổ quốc (1945 – nay)","Công cuộc Đổi mới ở Việt Nam từ 1986","Lịch sử đối ngoại Việt Nam","Hồ Chí Minh trong lịch sử Việt Nam"]
     }},
     "Địa Lý": {short:"Địa", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn — kết hợp khai thác Atlat, biểu đồ, bảng số liệu.", duration:"50 phút", parts:["Phần I – Nhiều lựa chọn: 18 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 4 câu"], grades:{
-      "10":["Bản đồ và kỹ năng địa lý","Trái Đất","Thạch quyển – Khí quyển – Thủy quyển","Sinh quyển","Địa lý dân cư đại cương"],
-      "11":["Địa lý kinh tế – xã hội thế giới đại cương","Địa lý khu vực và một số quốc gia (Hoa Kỳ, EU, Nhật Bản, Trung Quốc, ĐNÁ, Úc)"],
+      "10":["Bản đồ và kỹ năng địa lý","Trái Đất","Thạch quyển – Khí quyển – Thủy quyển","Sinh quyển","Địa lý dân cư đại cương","Địa lý các ngành kinh tế và phát triển bền vững"],
+      "11":["Sự khác biệt về trình độ phát triển kinh tế – xã hội, toàn cầu hóa và khu vực hóa","Địa lý khu vực và một số quốc gia (Mỹ Latinh, EU, Hoa Kỳ, Nga, Nhật Bản, Trung Quốc, Đông Nam Á, Australia)"],
       "12":["Địa lý tự nhiên Việt Nam","Địa lý dân cư Việt Nam","Địa lý các ngành kinh tế","Địa lý các vùng kinh tế","Kỹ năng biểu đồ – Atlat – bảng số liệu","Biển đảo Việt Nam"]
     }},
     "Tiếng Anh": {short:"Anh", format:"Trắc nghiệm nhiều lựa chọn (giữ định dạng quen thuộc), xây dựng theo Khung năng lực ngoại ngữ 6 bậc dùng cho Việt Nam.", duration:"60 phút", parts:["Ngữ âm – Trọng âm: 2 câu","Ngữ pháp – Từ vựng: 18 câu","Đọc hiểu (2-3 bài): 15 câu","Chức năng giao tiếp – Viết lại câu: 5 câu"], grades:{
@@ -54,7 +54,7 @@
       "12":["Ôn tập tổng hợp ngữ pháp trọng tâm","Từ vựng theo chủ đề đề thi THPT","Kỹ năng đọc hiểu nâng cao","Viết lại câu – viết đoạn văn","Luyện đề thi THPT Quốc gia"]
     }},
     "Giáo Dục KT&PL": {short:"KTPL", format:"Trắc nghiệm, 3 dạng câu hỏi: nhiều lựa chọn, đúng/sai (mỗi câu 4 ý), trả lời ngắn — gắn với tình huống pháp luật, kinh tế đời sống.", duration:"50 phút", parts:["Phần I – Nhiều lựa chọn: 18 câu","Phần II – Đúng/Sai: 4 câu (16 ý)","Phần III – Trả lời ngắn: 4 câu"], grades:{
-      "10":["Nền kinh tế và các chủ thể kinh tế","Sản xuất kinh doanh và các mô hình kinh tế","Ngân sách và các loại thuế","Pháp luật đời sống cơ bản"],
+      "10":["Nền kinh tế và các chủ thể kinh tế","Thị trường và cơ chế thị trường","Ngân sách nhà nước và thuế","Sản xuất kinh doanh và các mô hình sản xuất kinh doanh","Tín dụng và dịch vụ tín dụng","Lập kế hoạch tài chính cá nhân","Pháp luật nước Cộng hòa xã hội chủ nghĩa Việt Nam","Hiến pháp nước Cộng hòa xã hội chủ nghĩa Việt Nam","Hệ thống chính trị nước Cộng hòa xã hội chủ nghĩa Việt Nam"],
       "11":["Cạnh tranh, cung cầu trong nền kinh tế thị trường","Lạm phát, thất nghiệp","Ý tưởng và kế hoạch kinh doanh","Quyền bình đẳng của công dân"],
       "12":["Tăng trưởng và phát triển kinh tế","Hội nhập kinh tế quốc tế","Bảo hiểm và an sinh xã hội","Quản lý thu – chi trong gia đình","Trách nhiệm xã hội của doanh nghiệp","Quyền và nghĩa vụ công dân về pháp luật"]
     }},
