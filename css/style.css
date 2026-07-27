@@ -478,6 +478,33 @@ dialog#subject-modal::backdrop{background:rgba(40,26,60,.45);backdrop-filter:blu
 .lesson-block p{font-size:14px;color:var(--ink);line-height:1.6;}
 .lesson-block ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;}
 .lesson-block li{font-size:14px;color:var(--ink);line-height:1.55;}
+
+.example-item{display:flex;flex-direction:column;gap:6px;}
+.example-item + .example-item{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+.example-item .ex-label{font-size:12px;font-weight:800;color:var(--modal-accent, var(--accent));}
+.example-item .ex-problem{font-size:14px;color:var(--ink);line-height:1.55;}
+.example-item .ex-solution{font-size:13.5px;color:var(--ink-soft);line-height:1.6;background:var(--surface);border-radius:10px;padding:10px 12px;white-space:pre-line;}
+
+.practice-item{display:flex;flex-direction:column;gap:8px;}
+.practice-item + .practice-item{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+.practice-item .pr-tag{
+  align-self:flex-start;font-size:10.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;
+  padding:3px 9px;border-radius:999px;background:var(--bg-panel);color:var(--ink-faint);
+}
+.practice-item .pr-tag.nhan-biet{color:var(--sage);}
+.practice-item .pr-tag.thong-hieu{color:var(--sky);}
+.practice-item .pr-tag.van-dung{color:var(--coral);}
+.practice-item .pr-question{font-size:14px;color:var(--ink);line-height:1.55;}
+.pr-answer-toggle{
+  align-self:flex-start;background:none;border:1px solid var(--line);border-radius:999px;
+  padding:5px 12px;font-size:12px;font-weight:700;color:var(--modal-accent, var(--accent));cursor:pointer;
+}
+.pr-answer-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+.pr-answer{
+  display:none;font-size:13.5px;color:var(--ink-soft);background:var(--surface);
+  border-radius:10px;padding:10px 12px;white-space:pre-line;
+}
+.pr-answer.open{display:block;}
 .lesson-soon{background:var(--accent-tint);border-radius:14px;padding:16px;text-align:center;}
 .lesson-soon p{font-size:13.5px;color:var(--ink);line-height:1.6;}
 

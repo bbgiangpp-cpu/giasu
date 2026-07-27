@@ -86,139 +86,299 @@
   // Đang làm dần từng chương — chương chưa có sẽ hiện thông báo "sắp cập nhật".
   var LESSON_CONTENT = {
     "Toán::Mệnh đề và tập hợp": {
-      objectives: "Nắm khái niệm mệnh đề, mệnh đề phủ định và các phép toán trên tập hợp.",
+      objectives: "Thiết lập và xét được tính đúng/sai của mệnh đề toán học; thực hiện được các phép toán trên tập hợp.",
+      requirements: [
+        "Thiết lập và phát biểu được các mệnh đề toán học, bao gồm: mệnh đề phủ định; mệnh đề đảo; mệnh đề tương đương; mệnh đề chứa kí hiệu ∀, ∃; điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
+        "Xác định được tính đúng/sai của một mệnh đề toán học trong những trường hợp đơn giản.",
+        "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+        "Thực hiện được phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con) và biết dùng biểu đồ Ven để biểu diễn.",
+        "Giải quyết được một số vấn đề thực tiễn gắn với phép toán trên tập hợp (ví dụ: đếm số phần tử của hợp các tập hợp)."
+      ],
       theory: [
         "Mệnh đề là câu khẳng định đúng hoặc sai, không thể vừa đúng vừa sai.",
+        "Mệnh đề kéo theo P⇒Q; mệnh đề đảo là Q⇒P; hai mệnh đề tương đương P⇔Q khi cả P⇒Q và Q⇒P đều đúng.",
         "Phủ định của mệnh đề P kí hiệu P̄; P và P̄ luôn trái ngược giá trị đúng/sai.",
-        "Các phép toán tập hợp: hợp A∪B, giao A∩B, hiệu A\\B; A=B khi A⊂B và B⊂A.",
+        "Mệnh đề chứa kí hiệu ∀ (\"với mọi\"), ∃ (\"tồn tại\"); phủ định của ∀x, P(x) là ∃x, P̄(x) và ngược lại.",
+        "Các phép toán tập hợp: hợp A∪B, giao A∩B, hiệu A\\B, phần bù C_R(A)=R\\A; A=B khi A⊂B và B⊂A.",
         "Các tập con thường gặp của R: khoảng (a;b), đoạn [a;b], nửa khoảng (a;b], [a;b)."
       ],
-      example: "Cho A = {x ∈ R | −2 ≤ x < 3} và B = (0;5). Lấy phần chung của hai khoảng ta được A∩B = [0;3).",
+      examples: [
+        { problem: "Cho mệnh đề P: \"∀x∈R, x²≥0\". Xét tính đúng/sai và viết mệnh đề phủ định của P.",
+          solution: "P đúng vì bình phương của mọi số thực đều không âm.\nPhủ định: P̄: \"∃x∈R, x²<0\" — mệnh đề P̄ này sai." },
+        { problem: "Cho A=[−3;5], B=(0;7]. Tìm A∪B, A∩B, A\\B và phần bù của A trong R.",
+          solution: "A∪B = [−3;7]\nA∩B = (0;5]\nA\\B = [−3;0]\nC_R(A) = (−∞;−3) ∪ (5;+∞)" }
+      ],
       practice: [
-        "Xác định A∪B và A\\B với A = [1;4], B = (2;6).",
-        "Viết mệnh đề phủ định của: \"Mọi số nguyên tố lớn hơn 2 đều là số lẻ.\""
+        { level: "nhan-biet", question: "Cho mệnh đề Q: \"5 là số chẵn\". Xét tính đúng/sai của Q và viết mệnh đề phủ định.",
+          answer: "Q sai (vì 5 là số lẻ). Phủ định Q̄: \"5 không phải là số chẵn\" — Q̄ đúng." },
+        { level: "thong-hieu", question: "Viết mệnh đề đảo của: \"Nếu tứ giác là hình vuông thì nó là hình chữ nhật\". Mệnh đề đảo đó đúng hay sai?",
+          answer: "Đảo: \"Nếu tứ giác là hình chữ nhật thì nó là hình vuông\" — mệnh đề này SAI (không phải hình chữ nhật nào cũng là hình vuông), nên không thể ghép thành mệnh đề tương đương." },
+        { level: "van-dung", question: "Cho A={x∈N | x≤10, x chẵn}, B={x∈N | x≤10, x chia hết cho 3}. Tìm A∩B và số phần tử của A∪B.",
+          answer: "A={0,2,4,6,8,10}, B={0,3,6,9}. A∩B={0,6}.\n|A∪B| = |A|+|B|−|A∩B| = 6+4−2 = 8." }
       ]
     },
     "Toán::Bất phương trình và hệ bất phương trình bậc nhất hai ẩn": {
-      objectives: "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn và áp dụng vào bài toán tối ưu đơn giản.",
+      objectives: "Biểu diễn được miền nghiệm của bất phương trình, hệ bất phương trình bậc nhất hai ẩn và vận dụng vào bài toán tối ưu.",
+      requirements: [
+        "Nhận biết được bất phương trình và hệ bất phương trình bậc nhất hai ẩn.",
+        "Biểu diễn được miền nghiệm của bất phương trình và hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+        "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn (ví dụ: bài toán tìm cực trị của biểu thức F=ax+by trên một miền đa giác)."
+      ],
       theory: [
         "Bất phương trình bậc nhất hai ẩn có dạng ax+by ≤ c (hoặc <, ≥, >).",
         "Miền nghiệm là một nửa mặt phẳng — xác định bằng cách thay tọa độ một điểm (thường là gốc O) vào bất phương trình.",
         "Hệ bất phương trình có miền nghiệm là giao các nửa mặt phẳng, thường là một đa giác lồi.",
         "Giá trị lớn nhất/nhỏ nhất của F=ax+by trên miền nghiệm luôn đạt tại một đỉnh của đa giác đó."
       ],
-      example: "Miền nghiệm của hệ x+y ≤ 4, x≥0, y≥0 là tam giác có 3 đỉnh (0;0), (4;0), (0;4).",
+      examples: [
+        { problem: "Biểu diễn miền nghiệm của bất phương trình x−2y≤2.",
+          solution: "Vẽ đường thẳng x−2y=2 (đi qua (2;0) và (0;−1)).\nThay tọa độ O(0;0) vào: 0−0=0≤2 (đúng) → miền nghiệm là nửa mặt phẳng chứa gốc O, kể cả đường biên." },
+        { problem: "Tìm giá trị lớn nhất của F=3x+2y trên miền nghiệm của hệ: x+y≤5; x≥0; y≥0.",
+          solution: "Miền nghiệm là tam giác có 3 đỉnh (0;0), (5;0), (0;5).\nTính F tại từng đỉnh: (0;0)→0; (5;0)→15; (0;5)→10.\nVậy Max F = 15, đạt tại (5;0)." }
+      ],
       practice: [
-        "Tìm miền nghiệm của hệ: x+2y≤6; x≥0; y≥0.",
-        "Tìm giá trị lớn nhất của F=2x+3y trên miền nghiệm ở ví dụ trên."
+        { level: "nhan-biet", question: "Trong hai bất phương trình sau, bất phương trình nào là bậc nhất hai ẩn: a) 2x+3y≤6  b) x²+y≤4?",
+          answer: "a) Là bất phương trình bậc nhất hai ẩn.\nb) Không phải, vì chứa x² (bậc hai)." },
+        { level: "thong-hieu", question: "Biểu diễn miền nghiệm của hệ: x+y≤4; x≥0; y≥0.",
+          answer: "Miền nghiệm là tam giác có 3 đỉnh (0;0), (4;0), (0;4), tính cả phần biên." },
+        { level: "van-dung", question: "Tìm giá trị lớn nhất của F=x+2y trên miền nghiệm của hệ ở câu trên.",
+          answer: "Tính F tại 3 đỉnh: (0;0)→0; (4;0)→4; (0;4)→8.\nVậy Max F = 8, đạt tại (0;4)." }
       ]
     },
     "Toán::Hàm số bậc hai và đồ thị": {
-      objectives: "Khảo sát được sự biến thiên và vẽ được đồ thị hàm số bậc hai y=ax²+bx+c.",
+      objectives: "Mô tả được khái niệm hàm số, khảo sát và vẽ được đồ thị hàm số bậc hai, vận dụng vào bài toán thực tiễn.",
+      requirements: [
+        "Nhận biết được những mô hình thực tế (dạng bảng, biểu đồ, công thức) dẫn đến khái niệm hàm số.",
+        "Mô tả được các khái niệm cơ bản về hàm số: định nghĩa, tập xác định, tập giá trị, hàm số đồng biến, hàm số nghịch biến, đồ thị của hàm số.",
+        "Thiết lập được bảng giá trị và vẽ được Parabol là đồ thị của hàm số bậc hai; nhận biết được đỉnh, trục đối xứng.",
+        "Nhận biết và giải thích được các tính chất của hàm số bậc hai thông qua đồ thị.",
+        "Vận dụng được kiến thức về hàm số bậc hai và đồ thị vào giải quyết bài toán thực tiễn (ví dụ: xác định độ cao của cầu, cổng có hình dạng Parabol)."
+      ],
       theory: [
-        "Đồ thị là một parabol có đỉnh I(−b/2a; −Δ/4a), trục đối xứng x=−b/2a.",
-        "Nếu a>0: parabol quay bề lõm lên trên, hàm đạt giá trị nhỏ nhất tại đỉnh; a<0 thì ngược lại.",
+        "Đồ thị hàm số y=ax²+bx+c là một parabol có đỉnh I(−b/2a; −Δ/4a), trục đối xứng x=−b/2a.",
+        "Nếu a>0: parabol quay bề lõm lên trên, hàm đạt giá trị nhỏ nhất tại đỉnh; a<0 thì ngược lại (giá trị lớn nhất).",
         "Hàm đồng biến/nghịch biến tùy theo x nằm bên nào so với hoành độ đỉnh.",
         "Δ=b²−4ac quyết định số giao điểm với trục hoành: Δ>0 (2 điểm), Δ=0 (1 điểm), Δ<0 (không cắt)."
       ],
-      example: "Với y=x²−4x+3: đỉnh I(2;−1), đồ thị cắt Ox tại x=1 và x=3.",
+      examples: [
+        { problem: "Khảo sát và tìm giao điểm với trục hoành của y=x²−4x+3.",
+          solution: "Đỉnh: x=−b/2a=2, y(2)=4−8+3=−1 → I(2;−1).\nΔ=16−12=4>0 → 2 nghiệm x=1, x=3 → đồ thị cắt Ox tại (1;0) và (3;0)." },
+        { problem: "Một quả bóng được ném lên theo quỹ đạo h(t)=−5t²+20t (h: mét, t: giây). Tìm độ cao lớn nhất và thời điểm đạt được.",
+          solution: "Đỉnh tại t=−b/2a=−20/(2·(−5))=2 (giây).\nh(2)=−5·4+40=20 (mét).\nVậy độ cao lớn nhất là 20m, đạt tại t=2 giây." }
+      ],
       practice: [
-        "Tìm tọa độ đỉnh và trục đối xứng của y=−2x²+4x+1.",
-        "Xét sự biến thiên của y=x²−2x trên khoảng (−∞;1) và (1;+∞)."
+        { level: "nhan-biet", question: "Tìm tọa độ đỉnh và trục đối xứng của y=−2x²+4x+1.",
+          answer: "x=−b/2a=−4/(2·(−2))=1; y(1)=−2+4+1=3 → đỉnh (1;3), trục đối xứng x=1." },
+        { level: "thong-hieu", question: "Xét sự biến thiên của y=x²−2x trên khoảng (−∞;1) và (1;+∞).",
+          answer: "a=1>0, đỉnh tại x=1 → hàm nghịch biến trên (−∞;1), đồng biến trên (1;+∞)." },
+        { level: "van-dung", question: "Một cổng chào hình Parabol cao 6m tại đỉnh, hai chân cổng cách nhau 8m. Viết hàm số biểu diễn hình dạng cổng (chọn trục tung đi qua đỉnh).",
+          answer: "Đỉnh (0;6), hai chân tại (±4;0). Dạng y=ax²+6; thay (4;0): 0=16a+6 → a=−3/8.\nVậy y = −(3/8)x² + 6." }
       ]
     },
     "Toán::Bất phương trình bậc hai một ẩn": {
-      objectives: "Giải được bất phương trình bậc hai bằng cách xét dấu tam thức.",
+      objectives: "Giải thích được dấu tam thức bậc hai, giải được bất phương trình bậc hai và phương trình quy về bậc hai.",
+      requirements: [
+        "Giải thích được định lí về dấu của tam thức bậc hai từ việc quan sát đồ thị của hàm bậc hai.",
+        "Giải được bất phương trình bậc hai.",
+        "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn (ví dụ: xác định chiều cao tối đa để xe qua hầm có hình dạng Parabol).",
+        "Giải được phương trình chứa căn thức dạng √(ax²+bx+c)=√(dx²+ex+f) và √(ax²+bx+c)=dx+e."
+      ],
       theory: [
         "Nếu Δ>0: f(x)=ax²+bx+c cùng dấu a khi x ở ngoài khoảng hai nghiệm, trái dấu a khi x ở giữa hai nghiệm.",
-        "Nếu Δ=0: f(x) cùng dấu a với mọi x khác nghiệm kép.",
-        "Nếu Δ<0: f(x) cùng dấu a với mọi giá trị x.",
-        "Quy trình giải: tìm nghiệm (nếu có) → lập bảng xét dấu → kết luận theo yêu cầu đề bài."
+        "Nếu Δ=0: f(x) cùng dấu a với mọi x khác nghiệm kép; nếu Δ<0: f(x) cùng dấu a với mọi giá trị x.",
+        "Quy trình giải bất phương trình bậc hai: tìm nghiệm (nếu có) → lập bảng xét dấu → kết luận theo yêu cầu đề bài.",
+        "Giải phương trình chứa căn: đặt điều kiện cho vế phải (nếu có) không âm, bình phương hai vế, giải phương trình thu được rồi thử lại điều kiện."
       ],
-      example: "Giải x²−5x+6≤0: hai nghiệm x=2, x=3, tam thức trái dấu a giữa hai nghiệm nên nghiệm là x∈[2;3].",
+      examples: [
+        { problem: "Giải bất phương trình x²−5x+6≤0.",
+          solution: "Δ=25−24=1>0 → hai nghiệm x=2, x=3.\nVì a=1>0, tam thức âm (trái dấu a) giữa hai nghiệm → nghiệm bất phương trình là x∈[2;3]." },
+        { problem: "Giải phương trình √(2x²−3x−1) = √(x²+x−1).",
+          solution: "Bình phương hai vế: 2x²−3x−1 = x²+x−1 ⟺ x²−4x=0 ⟺ x=0 hoặc x=4.\nThử điều kiện x²+x−1≥0: x=0 → −1<0 (loại); x=4 → 19≥0 (nhận).\nVậy nghiệm x=4." }
+      ],
       practice: [
-        "Giải bất phương trình −x²+3x−2>0.",
-        "Tìm m để x²−2x+m>0 đúng với mọi x (gợi ý: xét Δ<0)."
+        { level: "nhan-biet", question: "Giải bất phương trình −x²+3x−2>0.",
+          answer: "Δ=9−8=1>0 → nghiệm x=1, x=2. Vì a=−1<0, tam thức dương giữa hai nghiệm → nghiệm 1<x<2." },
+        { level: "thong-hieu", question: "Tìm m để x²−2x+m>0 đúng với mọi x.",
+          answer: "Cần a>0 (đã có) và Δ<0: 4−4m<0 ⟺ m>1." },
+        { level: "van-dung", question: "Giải phương trình √(x²−x−4) = x−2.",
+          answer: "Điều kiện x−2≥0 ⟺ x≥2. Bình phương: x²−x−4 = x²−4x+4 ⟺ 3x=8 ⟺ x=8/3 (thỏa x≥2).\nVậy nghiệm x=8/3." }
       ]
     },
     "Toán::Đại số tổ hợp": {
-      objectives: "Vận dụng quy tắc đếm, hoán vị, chỉnh hợp, tổ hợp để giải bài toán đếm.",
+      objectives: "Vận dụng quy tắc đếm, hoán vị, chỉnh hợp, tổ hợp và khai triển được nhị thức Newton với số mũ thấp.",
+      requirements: [
+        "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống đơn giản.",
+        "Vận dụng được sơ đồ hình cây trong các bài toán đếm đơn giản.",
+        "Tính được số các hoán vị, chỉnh hợp, tổ hợp (kể cả bằng máy tính cầm tay).",
+        "Khai triển được nhị thức Newton (a+b)ⁿ với số mũ thấp (n=4 hoặc n=5) bằng cách vận dụng tổ hợp."
+      ],
       theory: [
         "Quy tắc cộng: hai phương án không trùng nhau, có m và n cách chọn thì có m+n cách.",
         "Quy tắc nhân: hai công đoạn liên tiếp có m và n cách thì có m×n cách.",
         "Hoán vị n phần tử: n!; Chỉnh hợp chập k của n: A(n,k)=n!/(n−k)!; Tổ hợp chập k: C(n,k)=n!/(k!(n−k)!).",
-        "Chỉnh hợp quan tâm thứ tự, tổ hợp thì không."
+        "Chỉnh hợp quan tâm thứ tự, tổ hợp thì không.",
+        "Nhị thức Newton: (a+b)ⁿ = ΣC(n,k)·a^(n−k)·b^k, các hệ số C(n,k) lấy từ tam giác Pascal."
       ],
-      example: "Xếp 5 học sinh vào 5 ghế khác nhau: 5! = 120 cách.",
+      examples: [
+        { problem: "Có bao nhiêu cách xếp 5 học sinh vào 5 ghế khác nhau?",
+          solution: "Đây là hoán vị của 5 phần tử: 5! = 120 cách." },
+        { problem: "Khai triển (x+2)⁴.",
+          solution: "Hệ số Pascal hàng 4: 1, 4, 6, 4, 1.\n(x+2)⁴ = x⁴ + 4x³·2 + 6x²·4 + 4x·8 + 16 = x⁴+8x³+24x²+32x+16." }
+      ],
       practice: [
-        "Từ 10 người chọn 3 người giữ 3 chức vụ khác nhau — hỏi có bao nhiêu cách?",
-        "Hộp có 6 bi đỏ, 4 bi xanh. Chọn ngẫu nhiên 3 bi, hỏi có bao nhiêu cách chọn được đúng 2 bi đỏ?"
+        { level: "nhan-biet", question: "Tính C(6,2) và A(6,2).",
+          answer: "C(6,2) = 6!/(2!4!) = 15. A(6,2) = 6!/4! = 30." },
+        { level: "thong-hieu", question: "Có bao nhiêu số tự nhiên có 3 chữ số khác nhau lập từ tập {1,2,3,4,5}?",
+          answer: "Đây là chỉnh hợp chập 3 của 5: A(5,3) = 5!/2! = 60 số." },
+        { level: "van-dung", question: "Khai triển (2x−1)⁴ và tìm hệ số của x².",
+          answer: "Số hạng chứa x²: C(4,2)·(2x)²·(−1)² = 6·4x²·1 = 24x². Vậy hệ số của x² là 24." }
       ]
     },
     "Toán::Hệ thức lượng trong tam giác": {
-      objectives: "Áp dụng định lý sin, định lý cosin để tính cạnh và góc trong tam giác.",
+      objectives: "Vận dụng định lý sin, cosin, công thức diện tích để giải tam giác và bài toán thực tiễn.",
+      requirements: [
+        "Nhận biết và tính được giá trị lượng giác của một góc từ 0° đến 180° (kể cả bằng máy tính cầm tay).",
+        "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+        "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin, định lí sin, công thức tính diện tích tam giác.",
+        "Mô tả được cách giải tam giác và vận dụng vào bài toán thực tiễn (ví dụ: xác định khoảng cách giữa hai địa điểm khi gặp vật cản, xác định chiều cao khi không thể đo trực tiếp)."
+      ],
       theory: [
         "Định lý cosin: a² = b² + c² − 2bc·cosA (và các hoán vị tương ứng cho b², c²).",
         "Định lý sin: a/sinA = b/sinB = c/sinC = 2R, với R là bán kính đường tròn ngoại tiếp.",
-        "Diện tích tam giác: S = (1/2)ab·sinC, hoặc theo công thức Heron: S = √(p(p−a)(p−b)(p−c))."
+        "Diện tích tam giác: S = (1/2)ab·sinC, hoặc theo công thức Heron: S = √(p(p−a)(p−b)(p−c)) với p là nửa chu vi.",
+        "Góc bù nhau: sin(180°−α)=sinα, cos(180°−α)=−cosα."
       ],
-      example: "Tam giác có a=7, b=8, góc C=60°: c² = 49+64−2·7·8·0,5 = 57, nên c = √57.",
+      examples: [
+        { problem: "Tam giác có a=7, b=8, góc C=60°. Tính cạnh c.",
+          solution: "c² = a²+b²−2ab·cosC = 49+64−2·7·8·0,5 = 57 → c = √57 ≈ 7,55." },
+        { problem: "Tam giác ABC có a=6, B=45°, C=60°. Tính góc A và các cạnh còn lại.",
+          solution: "A = 180°−45°−60° = 75°.\nTheo định lý sin: b = a·sinB/sinA = 6·sin45°/sin75° ≈ 4,39.\nc = a·sinC/sinA = 6·sin60°/sin75° ≈ 5,38." }
+      ],
       practice: [
-        "Tam giác ABC có A=45°, B=60°, cạnh a=4. Tính cạnh b.",
-        "Tính diện tích tam giác có ba cạnh 5, 6, 7 bằng công thức Heron."
+        { level: "nhan-biet", question: "Tính sin150° bằng công thức góc bù.",
+          answer: "sin150° = sin(180°−150°) = sin30° = 0,5." },
+        { level: "thong-hieu", question: "Tam giác ABC có A=45°, B=60°, cạnh a=4. Tính cạnh b.",
+          answer: "b = a·sinB/sinA = 4·sin60°/sin45° ≈ 4·0,866/0,707 ≈ 4,90." },
+        { level: "van-dung", question: "Hai người đứng cách nhau 50m ở hai phía đối diện một tòa tháp, cùng nhìn thấy đỉnh tháp với góc nâng 30° và 45°. Tính chiều cao tháp.",
+          answer: "Gọi h là chiều cao tháp. Khoảng cách từ mỗi người tới chân tháp là h/tan30° và h/tan45°.\nTổng hai khoảng cách = 50 ⟹ h(√3+1) = 50 ⟹ h = 50/(√3+1) ≈ 18,3 m." }
       ]
     },
     "Toán::Vectơ": {
-      objectives: "Thực hiện được các phép toán vectơ và tích vô hướng của hai vectơ.",
+      objectives: "Thực hiện được các phép toán vectơ và vận dụng vào bài toán hình học, thực tiễn.",
+      requirements: [
+        "Nhận biết được khái niệm vectơ, vectơ bằng nhau, vectơ-không; biểu thị được một số đại lượng thực tiễn bằng vectơ.",
+        "Thực hiện được các phép toán trên vectơ (tổng, hiệu, tích của một số với vectơ, tích vô hướng) và mô tả được tính chất hình học (ba điểm thẳng hàng, trung điểm, trọng tâm tam giác) bằng vectơ.",
+        "Sử dụng được vectơ để giải thích một số hiện tượng liên quan đến Vật lí, Hóa học (lực, chuyển động).",
+        "Vận dụng được kiến thức về vectơ để giải một số bài toán hình học và bài toán thực tiễn."
+      ],
       theory: [
         "Hai vectơ bằng nhau khi cùng hướng và cùng độ dài.",
         "Quy tắc ba điểm: vectơ AB + vectơ BC = vectơ AC.",
         "Tích vô hướng: a⃗·b⃗ = |a⃗|·|b⃗|·cosθ; hai vectơ vuông góc khi tích vô hướng bằng 0.",
-        "Tọa độ trung điểm, trọng tâm tam giác tính trực tiếp từ tọa độ các điểm."
+        "Tọa độ trung điểm M của AB: M=((x_A+x_B)/2; (y_A+y_B)/2). Tọa độ trọng tâm G của tam giác ABC: G=((x_A+x_B+x_C)/3; (y_A+y_B+y_C)/3)."
       ],
-      example: "Cho A(1;2), B(3;4): vectơ AB có tọa độ (2;2), độ dài |AB| = 2√2.",
+      examples: [
+        { problem: "Cho A(1;2), B(3;4). Tìm tọa độ và độ dài vectơ AB.",
+          solution: "Vectơ AB = (3−1; 4−2) = (2;2). Độ dài |AB| = √(4+4) = 2√2." },
+        { problem: "Cho A(1;1), B(4;1), C(1;5). Tìm tọa độ trọng tâm G của tam giác ABC.",
+          solution: "G = ((1+4+1)/3; (1+1+5)/3) = (2; 7/3)." }
+      ],
       practice: [
-        "Cho A(0;0), B(4;0), C(0;3). Tính vectơ AB·vectơ AC.",
-        "Chứng minh tam giác ABC vuông tại A khi vectơ AB vuông góc vectơ AC."
+        { level: "nhan-biet", question: "Cho vectơ a⃗=(3;−4). Tính độ dài |a⃗|.",
+          answer: "|a⃗| = √(3²+(−4)²) = √25 = 5." },
+        { level: "thong-hieu", question: "Cho A(0;0), B(4;0), C(0;3). Tính vectơ AB·vectơ AC.",
+          answer: "Vectơ AB=(4;0), vectơ AC=(0;3). Tích vô hướng = 4·0+0·3 = 0." },
+        { level: "van-dung", question: "Từ kết quả câu trên, hãy kết luận về tam giác ABC.",
+          answer: "Vì vectơ AB·vectơ AC = 0 nên AB⊥AC, suy ra tam giác ABC vuông tại A." }
       ]
     },
     "Toán::Phương pháp tọa độ trong mặt phẳng": {
-      objectives: "Viết được phương trình đường thẳng, đường tròn trong mặt phẳng tọa độ.",
+      objectives: "Thiết lập được phương trình đường thẳng, đường tròn trong mặt phẳng tọa độ và vận dụng vào bài toán thực tiễn.",
+      requirements: [
+        "Nhận biết được tọa độ của vectơ đối với một hệ trục tọa độ; tìm được tọa độ, độ dài vectơ khi biết tọa độ hai đầu mút.",
+        "Thiết lập được phương trình đường thẳng khi biết: một điểm và vectơ pháp tuyến; một điểm và vectơ chỉ phương; hoặc hai điểm.",
+        "Nhận biết được vị trí tương đối của hai đường thẳng; tính được góc giữa hai đường thẳng và khoảng cách từ một điểm đến một đường thẳng.",
+        "Thiết lập được phương trình đường tròn khi biết tâm và bán kính, hoặc biết ba điểm mà đường tròn đi qua; thiết lập được phương trình tiếp tuyến của đường tròn.",
+        "Nhận biết được ba đường conic (elip, hypebol, parabol) và phương trình chính tắc của chúng."
+      ],
       theory: [
         "Phương trình tổng quát đường thẳng: ax+by+c=0, với vectơ pháp tuyến (a;b).",
-        "Phương trình đường tròn tâm I(a;b), bán kính R: (x−a)²+(y−b)²=R².",
-        "Khoảng cách từ điểm M(x₀;y₀) đến đường thẳng ax+by+c=0: d = |ax₀+by₀+c| / √(a²+b²)."
+        "Khoảng cách từ điểm M(x₀;y₀) đến đường thẳng ax+by+c=0: d = |ax₀+by₀+c| / √(a²+b²).",
+        "Góc giữa hai đường thẳng có vectơ pháp tuyến (a₁;b₁), (a₂;b₂): cosθ = |a₁a₂+b₁b₂| / (√(a₁²+b₁²)·√(a₂²+b₂²)).",
+        "Phương trình đường tròn tâm I(a;b), bán kính R: (x−a)²+(y−b)²=R²."
       ],
-      example: "Đường thẳng qua A(1;2) có vectơ pháp tuyến (2;−1): 2(x−1)−1(y−2)=0, tức 2x−y=0.",
+      examples: [
+        { problem: "Viết phương trình đường thẳng qua A(1;2) có vectơ pháp tuyến (2;−1).",
+          solution: "Phương trình: 2(x−1) − 1(y−2) = 0 ⟺ 2x−y = 0." },
+        { problem: "Viết phương trình đường tròn tâm I(1;2) đi qua điểm A(4;6).",
+          solution: "Bán kính R = IA = √((4−1)²+(6−2)²) = √(9+16) = 5.\nPhương trình: (x−1)²+(y−2)² = 25." }
+      ],
       practice: [
-        "Viết phương trình đường tròn tâm I(2;−1), bán kính 3.",
-        "Tính khoảng cách từ điểm (0;0) đến đường thẳng 3x+4y−5=0."
+        { level: "nhan-biet", question: "Viết phương trình đường tròn tâm I(2;−1), bán kính 3.",
+          answer: "(x−2)² + (y+1)² = 9." },
+        { level: "thong-hieu", question: "Tính khoảng cách từ điểm (0;0) đến đường thẳng 3x+4y−5=0.",
+          answer: "d = |3·0+4·0−5| / √(3²+4²) = 5/5 = 1." },
+        { level: "van-dung", question: "Viết phương trình tiếp tuyến của đường tròn (x−1)²+(y−2)²=25 tại điểm A(4;6).",
+          answer: "Vectơ pháp tuyến của tiếp tuyến là IA=(3;4).\nPhương trình: 3(x−4)+4(y−6)=0 ⟺ 3x+4y−36=0." }
       ]
     },
     "Toán::Thống kê": {
-      objectives: "Tính được các số đặc trưng đo xu thế trung tâm và độ phân tán của mẫu số liệu.",
+      objectives: "Tính được các số đặc trưng đo xu thế trung tâm và mức độ phân tán cho mẫu số liệu không ghép nhóm.",
+      requirements: [
+        "Hiểu được khái niệm số gần đúng, sai số tuyệt đối; xác định được sai số tương đối và số quy tròn.",
+        "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu.",
+        "Tính được số đặc trưng đo xu thế trung tâm: số trung bình, trung vị, tứ phân vị, mốt — và giải thích được ý nghĩa của chúng.",
+        "Tính được số đặc trưng đo mức độ phân tán: khoảng biến thiên, khoảng tứ phân vị, phương sai, độ lệch chuẩn — và giải thích được ý nghĩa của chúng."
+      ],
       theory: [
         "Số trung bình: cộng tất cả giá trị rồi chia cho số lượng phần tử.",
-        "Trung vị: giá trị ở giữa dãy số đã sắp xếp (hoặc trung bình cộng của 2 giá trị giữa nếu số phần tử chẵn).",
-        "Phương sai đo độ phân tán quanh giá trị trung bình; độ lệch chuẩn là căn bậc hai của phương sai."
+        "Trung vị: giá trị ở giữa dãy số đã sắp xếp (hoặc trung bình cộng của 2 giá trị giữa nếu số phần tử chẵn); tứ phân vị Q1, Q2(=trung vị), Q3 chia dãy thành 4 phần bằng nhau.",
+        "Mốt: giá trị xuất hiện nhiều nhất trong mẫu số liệu.",
+        "Khoảng biến thiên = giá trị lớn nhất − giá trị nhỏ nhất; phương sai đo độ phân tán quanh trung bình; độ lệch chuẩn là căn bậc hai của phương sai."
       ],
-      example: "Dãy số 2, 4, 4, 6 có trung bình = 4 và trung vị = 4.",
+      examples: [
+        { problem: "Tính số trung bình và trung vị của dãy: 2, 4, 4, 6.",
+          solution: "Trung bình = (2+4+4+6)/4 = 4.\nDãy đã sắp xếp có 4 giá trị (chẵn) → trung vị = (4+4)/2 = 4." },
+        { problem: "Tính tứ phân vị của dãy đã sắp xếp: 1, 3, 4, 5, 7, 8, 9, 10.",
+          solution: "Trung vị Q2 = (5+7)/2 = 6.\nNửa dưới {1,3,4,5} → Q1 = (3+4)/2 = 3,5.\nNửa trên {7,8,9,10} → Q3 = (8+9)/2 = 8,5." }
+      ],
       practice: [
-        "Tính số trung bình và trung vị của dãy: 3, 7, 7, 9, 10.",
-        "Giải thích vì sao độ lệch chuẩn nhỏ nghĩa là dữ liệu ít phân tán."
+        { level: "nhan-biet", question: "Tính số trung bình và trung vị của dãy: 3, 7, 7, 9, 10.",
+          answer: "Trung bình = (3+7+7+9+10)/5 = 7,2. Trung vị (giá trị giữa của dãy đã sắp xếp) = 7." },
+        { level: "thong-hieu", question: "Tính phương sai và độ lệch chuẩn của mẫu 2, 4, 4, 6 (biết trung bình = 4).",
+          answer: "Phương sai = [(2−4)²+(4−4)²+(4−4)²+(6−4)²]/4 = (4+0+0+4)/4 = 2.\nĐộ lệch chuẩn = √2 ≈ 1,41." },
+        { level: "van-dung", question: "Giải thích vì sao độ lệch chuẩn nhỏ nghĩa là dữ liệu ít phân tán, cho ví dụ so sánh hai lớp học có cùng điểm trung bình.",
+          answer: "Độ lệch chuẩn nhỏ nghĩa là các giá trị trong mẫu gần với số trung bình. Ví dụ hai lớp cùng điểm trung bình 7, nhưng lớp A có độ lệch chuẩn 0,5 (điểm đồng đều quanh 7) còn lớp B có độ lệch chuẩn 2 (điểm rất phân tán, có em giỏi hẳn, có em kém hẳn) — lớp A học lực đồng đều hơn." }
       ]
     },
     "Toán::Xác suất": {
-      objectives: "Tính được xác suất của một biến cố trong phép thử đơn giản.",
+      objectives: "Mô tả được không gian mẫu, biến cố và tính được xác suất trong các phép thử đơn giản.",
+      requirements: [
+        "Nhận biết được các khái niệm: phép thử ngẫu nhiên, không gian mẫu, biến cố (là tập con của không gian mẫu), biến cố đối, định nghĩa cổ điển của xác suất.",
+        "Mô tả được không gian mẫu, biến cố trong một số thí nghiệm đơn giản (tung đồng xu hai/ba lần, tung xúc xắc hai lần).",
+        "Tính được xác suất của biến cố bằng phương pháp tổ hợp (trường hợp xác suất phân bố đều).",
+        "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
+        "Mô tả được các tính chất cơ bản của xác suất; tính được xác suất của biến cố đối."
+      ],
       theory: [
-        "Xác suất của biến cố A: P(A) = số kết quả thuận lợi / tổng số kết quả có thể.",
+        "Không gian mẫu là tập hợp tất cả kết quả có thể của một phép thử; biến cố là một tập con của không gian mẫu.",
+        "Xác suất của biến cố A: P(A) = số kết quả thuận lợi / tổng số kết quả có thể (khi các kết quả đồng khả năng).",
         "Luôn có 0 ≤ P(A) ≤ 1; P(biến cố chắc chắn)=1; P(biến cố không thể)=0.",
         "Biến cố đối: P(Ā) = 1 − P(A)."
       ],
-      example: "Gieo một con xúc xắc, xác suất ra mặt chẵn = 3/6 = 1/2.",
+      examples: [
+        { problem: "Gieo một con xúc xắc, tính xác suất ra mặt chẵn.",
+          solution: "Không gian mẫu có 6 kết quả {1,2,3,4,5,6}. Biến cố \"ra mặt chẵn\" = {2,4,6} có 3 kết quả.\nP = 3/6 = 1/2." },
+        { problem: "Tung một đồng xu 2 lần, tính xác suất được đúng 1 lần mặt ngửa.",
+          solution: "Không gian mẫu: {SS, SN, NS, NN} (4 kết quả, S=sấp, N=ngửa).\nBiến cố \"đúng 1 lần ngửa\" = {SN, NS} → P = 2/4 = 1/2." }
+      ],
       practice: [
-        "Rút ngẫu nhiên 1 lá bài từ bộ 52 lá, tính xác suất rút được lá cơ (♥).",
-        "Tính xác suất không ra mặt 6 khi gieo xúc xắc một lần."
+        { level: "nhan-biet", question: "Rút ngẫu nhiên 1 lá bài từ bộ 52 lá, tính xác suất rút được lá cơ (♥).",
+          answer: "Bộ bài có 13 lá cơ trong 52 lá → P = 13/52 = 1/4." },
+        { level: "thong-hieu", question: "Tính xác suất không ra mặt 6 khi gieo xúc xắc một lần.",
+          answer: "Biến cố đối của \"ra mặt 6\" (xác suất 1/6) là \"không ra mặt 6\" → P = 1 − 1/6 = 5/6." },
+        { level: "van-dung", question: "Tung xúc xắc 2 lần, tính xác suất tổng số chấm của hai lần tung bằng 7.",
+          answer: "Các cặp có tổng 7: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) — 6 kết quả thuận lợi trên 36 kết quả có thể.\nP = 6/36 = 1/6." }
       ]
     }
   };
@@ -237,13 +397,16 @@
   var lessonBack = document.getElementById("lesson-back");
   var lessonTitle = document.getElementById("lesson-title");
   var lessonObjectives = document.getElementById("lesson-objectives");
+  var lessonRequirementsBlock = document.getElementById("lesson-requirements-block");
+  var lessonRequirements = document.getElementById("lesson-requirements");
   var lessonTheoryBlock = document.getElementById("lesson-theory-block");
   var lessonTheory = document.getElementById("lesson-theory");
   var lessonExampleBlock = document.getElementById("lesson-example-block");
-  var lessonExample = document.getElementById("lesson-example");
+  var lessonExamples = document.getElementById("lesson-examples");
   var lessonPracticeBlock = document.getElementById("lesson-practice-block");
   var lessonPractice = document.getElementById("lesson-practice");
   var lessonSoon = document.getElementById("lesson-soon");
+  var LEVEL_LABELS = { "nhan-biet": "Nhận biết", "thong-hieu": "Thông hiểu", "van-dung": "Vận dụng" };
   var lessonCompleteRow = document.getElementById("lesson-complete-row");
   var lessonCompleteBtn = document.getElementById("lesson-complete-btn");
   var completeToast = document.getElementById("complete-toast");
@@ -296,6 +459,19 @@
       lessonSoon.hidden = true;
       lessonCompleteRow.hidden = false;
       lessonObjectives.textContent = lesson.objectives;
+
+      if (lesson.requirements && lesson.requirements.length) {
+        lessonRequirementsBlock.hidden = false;
+        lessonRequirements.innerHTML = "";
+        lesson.requirements.forEach(function(point){
+          var li = document.createElement("li");
+          li.textContent = point;
+          lessonRequirements.appendChild(li);
+        });
+      } else {
+        lessonRequirementsBlock.hidden = true;
+      }
+
       lessonTheoryBlock.hidden = false;
       lessonTheory.innerHTML = "";
       lesson.theory.forEach(function(point){
@@ -303,20 +479,50 @@
         li.textContent = point;
         lessonTheory.appendChild(li);
       });
+
       lessonExampleBlock.hidden = false;
-      lessonExample.textContent = lesson.example;
+      lessonExamples.innerHTML = "";
+      (lesson.examples || []).forEach(function(ex, i){
+        var item = document.createElement("div");
+        item.className = "example-item";
+        item.innerHTML =
+          '<span class="ex-label">Ví dụ ' + (i + 1) + '</span>' +
+          '<p class="ex-problem"></p>' +
+          '<p class="ex-solution"></p>';
+        item.querySelector(".ex-problem").textContent = ex.problem;
+        item.querySelector(".ex-solution").textContent = ex.solution;
+        lessonExamples.appendChild(item);
+      });
+
       lessonPracticeBlock.hidden = false;
       lessonPractice.innerHTML = "";
-      lesson.practice.forEach(function(item){
-        var li = document.createElement("li");
-        li.textContent = item;
-        lessonPractice.appendChild(li);
+      (lesson.practice || []).forEach(function(item, i){
+        var wrap = document.createElement("div");
+        wrap.className = "practice-item";
+        var levelClass = item.level || "";
+        var levelText = LEVEL_LABELS[item.level] || "Tự luyện";
+        wrap.innerHTML =
+          '<span class="pr-tag ' + levelClass + '">' + levelText + '</span>' +
+          '<p class="pr-question"></p>' +
+          '<button type="button" class="pr-answer-toggle">Xem đáp án</button>' +
+          '<p class="pr-answer"></p>';
+        wrap.querySelector(".pr-question").textContent = (i + 1) + ". " + item.question;
+        wrap.querySelector(".pr-answer").textContent = item.answer;
+        var toggleBtn = wrap.querySelector(".pr-answer-toggle");
+        var answerEl = wrap.querySelector(".pr-answer");
+        toggleBtn.addEventListener("click", function(){
+          var open = answerEl.classList.toggle("open");
+          toggleBtn.textContent = open ? "Ẩn đáp án" : "Xem đáp án";
+        });
+        lessonPractice.appendChild(wrap);
       });
+
       var done = isChapterDone(subject, chapterName);
       lessonCompleteBtn.disabled = done;
       lessonCompleteBtn.textContent = done ? "✓ Đã hoàn thành" : "✓ Đánh dấu đã hoàn thành";
     } else {
       lessonObjectives.textContent = "";
+      lessonRequirementsBlock.hidden = true;
       lessonTheoryBlock.hidden = true;
       lessonExampleBlock.hidden = true;
       lessonPracticeBlock.hidden = true;
