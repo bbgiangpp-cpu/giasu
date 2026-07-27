@@ -176,7 +176,7 @@ header.nav{
 @media (max-width:1060px){ .nav-links{display:none;} }
 
 /* ---------- Hero ---------- */
-.hero{position:relative;overflow:hidden;padding-top:56px;}
+.hero{position:relative;overflow:hidden;padding-top:56px;padding-bottom:32px;}
 
 .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55;z-index:0;}
 .blob-1{width:380px;height:380px;background:radial-gradient(circle at 30% 30%, var(--rose-tint), transparent 70%);top:-120px;right:-100px;}
